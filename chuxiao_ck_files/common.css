@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+/* index CSS */
+.tab-wrap {
+    display: flex;
+    width: 100%;
+    height: 45px;
+    margin-top: 16px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    list-style:none;
+}
+
+.tab-title {
+    width: 50%;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    border: 1px solid #07C160;
+    color: #07C160;
+}
+
+.change {
+    background-color: #07C160;
+    color: #fff;
+}
+
+.credentials {
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 0 16px;
+    margin-top: 50px;
+}
+
+.regular-wrap {
+    display: none;
+}
+
+
+
+.regular-m.weui-pay-m::before {
+    border-top: 30px solid rgb(5, 133, 192);
+}
+
+.tab-box>div {
+    display:none;
+}
+
+.tab-box div:first-Child {
+    display:block;
+}
+
+.weui-pay-v.regular-v {
+    color: rgb(5, 133, 192);
+}
+
+/* temporary CSS */
+.temp-box {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.top-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    background-color: #07C160;
+}
+.regular-bg {
+    background-color: rgb(5, 133, 192);
+}
+.Qrcode-wrap {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    width: 100%;
+    /* height: 500px; */
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    height: 600px;
+    padding: 24px;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow:0px 4px 16px 0px rgba(188,201,195,0.3);
+    border-radius:16px;
+}
+
+.cur-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.date-wrap {
+    height: 25px;
+    line-height: 25px;
+}
+.time-wrap {
+    height: 35px;
+    line-height: 35px;
+}
+
+.Qrcode-msg {
+    padding: 16px;
+    box-sizing: border-box;
+    border-top: 1px solid #07C160;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Qrcode-pic {
+    width: 200px;
+    height: 200px;
+    margin-top: 24px;
+}
+
+.countdown {
+    width: 250px;
+    height: 45px;
+    color: #fff;
+    background-color: #07C160;
+    margin-top: 24px;
+    line-height: 45px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 12px;
+}
+
+
+.pass {
+    color: #07C160;
+}
+
+.refused {
+    color: red;
+}
