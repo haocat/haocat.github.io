@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)http://test.sxhuzhen.com/xqdist/code/index.html -->
+<html lang="en" class="pixel-ratio-1"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>返校码</title>
+
+    <link rel="stylesheet" href="./ck_fx_files/weui.css">
+    <link rel="stylesheet" href="./ck_fx_files/weuix.css">
+    <link rel="stylesheet" href="./ck_fx_files/common.css">
+    <script src="./ck_fx_files/jquery.min.js.下载"></script>
+    <script src="./ck_fx_files/jquery.cookie.js.下载"></script>
+
+    <script src="./ck_fx_files/jquery.validate.min.js.下载"></script>
+    <script src="./ck_fx_files/jquery.form.min.js.下载"></script>
+    <script src="./ck_fx_files/zepto.min.js.下载"></script>
+    <script src="./ck_fx_files/php.js.下载"></script>
+    <script src="./ck_fx_files/picker.city.js.下载"></script>
+</head>
+<body>
+<div id="popout"></div>
+<div id="mask"></div>
+<div id="navigation"></div>
+<div id="content">
+    <style>
+        .countdown-2 {
+            font-size: 20px;
+            color: red;
+            margin-top: 20px;
+        }
+        .weui_btn_dialog.primary {
+            color: #10aeff!important;
+        }
+    </style>
+    <script>
+
+        var openPageTime = null;
+
+        function datetime() {
+            //创建日期时间对象
+            var datetime = new Date();
+            //获取组件
+            var year = datetime.getFullYear();
+            var month = datetime.getMonth() + 1;
+            var day = datetime.getDate();
+            var hour = datetime.getHours();
+            var minute = datetime.getMinutes();
+            var second = datetime.getSeconds();
+            if (hour < 10) {
+                var hour = 0 + "" + hour;
+            }
+            if (minute < 10) {
+                var minute = 0 + "" + minute;
+            }
+            if (second < 10) {
+                var second = 0 + "" + second;
+            }
+            var nowDate = month + "月" + day + "日";
+            var nowTime = hour + ":" + minute + ":" + second;
+            //更新内容
+
+            openPageTime = year + '-' + month + "-" + day + ' ' + hour + ":" + minute + ":" + second;
+
+            $(".date-wrap").html(nowDate);
+            $(".time-wrap").html(nowTime);
+        }
+
+        setInterval(datetime, 1000);
+
+
+        setTimeout(function () {
+            if (openPageTime) {
+                console.log($('#time')[0]);
+                $('#time').html('凭证启用时间' + openPageTime)
+            }
+        }, 1000)
+
+        $(function () {
+            var m = 0;
+            var s = 0;
+            var timer = setInterval(function () {
+                if (m == 0 && s == 0) {
+                    clearInterval(timer);
+                }
+                if (s < 10) {
+                    //如果秒数少于10在前面加上0
+                    $('.countdown').html(m + '分0' + s + '秒');
+                } else {
+                    $('.countdown').html(m + '分' + s + '秒');
+                }
+                s--;
+                if (s < 0) {
+                    //如果秒数少于0就变成59秒
+                    s = 59;
+                    m--;
+                }
+            }, 1000)
+        })
+    </script>
+    <div class="weui-tab" style="height:auto;">
+        <div>
+            <img style="width: 100%" src="./ck_fx_files/2020043056982021.jpg" alt="">
+        </div>
+        <div class="temp-box">
+            <div class="top-bg"></div>
+            <div class="Qrcode-wrap">
+                <div class="container">
+                    <div class="cur-time">
+                        <h1 class="date-wrap" style="font-size: 40px">8月7日</h1>
+                        <h1 class="time-wrap" style="font-size: 48px;margin-top: 20px">11:38:35</h1>
+                    </div>
+                    <div class="Qrcode-msg">
+                        <h3>姓名:陈珂</h3>
+                        <h3>学号:1709070331</h3>
+                        <div style="text-align: center;margin-top: 10px"><!--?xml version="1.0" encoding="UTF-8"?-->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="200px" height="200px" viewBox="0 0 200 200">
+                                <defs>
+                                    <rect id="r0" width="5" height="5" fill="#0099ff"></rect>
+                                </defs>
+                                <rect x="0" y="0" width="200" height="200" fill="#eeeeee"></rect>
+                                <use x="7" y="7" xlink:href="#r0"></use>
+                                <use x="12" y="7" xlink:href="#r0"></use>
+                                <use x="17" y="7" xlink:href="#r0"></use>
+                                <use x="22" y="7" xlink:href="#r0"></use>
+                                <use x="27" y="7" xlink:href="#r0"></use>
+                                <use x="32" y="7" xlink:href="#r0"></use>
+                                <use x="37" y="7" xlink:href="#r0"></use>
+                                <use x="52" y="7" xlink:href="#r0"></use>
+                                <use x="82" y="7" xlink:href="#r0"></use>
+                                <use x="87" y="7" xlink:href="#r0"></use>
+                                <use x="92" y="7" xlink:href="#r0"></use>
+                                <use x="107" y="7" xlink:href="#r0"></use>
+                                <use x="112" y="7" xlink:href="#r0"></use>
+                                <use x="117" y="7" xlink:href="#r0"></use>
+                                <use x="157" y="7" xlink:href="#r0"></use>
+                                <use x="162" y="7" xlink:href="#r0"></use>
+                                <use x="167" y="7" xlink:href="#r0"></use>
+                                <use x="172" y="7" xlink:href="#r0"></use>
+                                <use x="177" y="7" xlink:href="#r0"></use>
+                                <use x="182" y="7" xlink:href="#r0"></use>
+                                <use x="187" y="7" xlink:href="#r0"></use>
+                                <use x="7" y="12" xlink:href="#r0"></use>
+                                <use x="37" y="12" xlink:href="#r0"></use>
+                                <use x="47" y="12" xlink:href="#r0"></use>
+                                <use x="52" y="12" xlink:href="#r0"></use>
+                                <use x="62" y="12" xlink:href="#r0"></use>
+                                <use x="67" y="12" xlink:href="#r0"></use>
+                                <use x="92" y="12" xlink:href="#r0"></use>
+                                <use x="122" y="12" xlink:href="#r0"></use>
+                                <use x="127" y="12" xlink:href="#r0"></use>
+                                <use x="132" y="12" xlink:href="#r0"></use>
+                                <use x="142" y="12" xlink:href="#r0"></use>
+                                <use x="157" y="12" xlink:href="#r0"></use>
+                                <use x="187" y="12" xlink:href="#r0"></use>
+                                <use x="7" y="17" xlink:href="#r0"></use>
+                                <use x="17" y="17" xlink:href="#r0"></use>
+                                <use x="22" y="17" xlink:href="#r0"></use>
+                                <use x="27" y="17" xlink:href="#r0"></use>
+                                <use x="37" y="17" xlink:href="#r0"></use>
+                                <use x="52" y="17" xlink:href="#r0"></use>
+                                <use x="57" y="17" xlink:href="#r0"></use>
+                                <use x="62" y="17" xlink:href="#r0"></use>
+                                <use x="77" y="17" xlink:href="#r0"></use>
+                                <use x="87" y="17" xlink:href="#r0"></use>
+                                <use x="97" y="17" xlink:href="#r0"></use>
+                                <use x="102" y="17" xlink:href="#r0"></use>
+                                <use x="112" y="17" xlink:href="#r0"></use>
+                                <use x="117" y="17" xlink:href="#r0"></use>
+                                <use x="122" y="17" xlink:href="#r0"></use>
+                                <use x="127" y="17" xlink:href="#r0"></use>
+                                <use x="137" y="17" xlink:href="#r0"></use>
+                                <use x="147" y="17" xlink:href="#r0"></use>
+                                <use x="157" y="17" xlink:href="#r0"></use>
+                                <use x="167" y="17" xlink:href="#r0"></use>
+                                <use x="172" y="17" xlink:href="#r0"></use>
+                                <use x="177" y="17" xlink:href="#r0"></use>
+                                <use x="187" y="17" xlink:href="#r0"></use>
+                                <use x="7" y="22" xlink:href="#r0"></use>
+                                <use x="17" y="22" xlink:href="#r0"></use>
+                                <use x="22" y="22" xlink:href="#r0"></use>
+                                <use x="27" y="22" xlink:href="#r0"></use>
+                                <use x="37" y="22" xlink:href="#r0"></use>
+                                <use x="47" y="22" xlink:href="#r0"></use>
+                                <use x="52" y="22" xlink:href="#r0"></use>
+                                <use x="62" y="22" xlink:href="#r0"></use>
+                                <use x="87" y="22" xlink:href="#r0"></use>
+                                <use x="92" y="22" xlink:href="#r0"></use>
+                                <use x="102" y="22" xlink:href="#r0"></use>
+                                <use x="107" y="22" xlink:href="#r0"></use>
+                                <use x="112" y="22" xlink:href="#r0"></use>
+                                <use x="127" y="22" xlink:href="#r0"></use>
+                                <use x="137" y="22" xlink:href="#r0"></use>
+                                <use x="142" y="22" xlink:href="#r0"></use>
+                                <use x="157" y="22" xlink:href="#r0"></use>
+                                <use x="167" y="22" xlink:href="#r0"></use>
+                                <use x="172" y="22" xlink:href="#r0"></use>
+                                <use x="177" y="22" xlink:href="#r0"></use>
+                                <use x="187" y="22" xlink:href="#r0"></use>
+                                <use x="7" y="27" xlink:href="#r0"></use>
+                                <use x="17" y="27" xlink:href="#r0"></use>
+                                <use x="22" y="27" xlink:href="#r0"></use>
+                                <use x="27" y="27" xlink:href="#r0"></use>
+                                <use x="37" y="27" xlink:href="#r0"></use>
+                                <use x="57" y="27" xlink:href="#r0"></use>
+                                <use x="67" y="27" xlink:href="#r0"></use>
+                                <use x="72" y="27" xlink:href="#r0"></use>
+                                <use x="77" y="27" xlink:href="#r0"></use>
+                                <use x="82" y="27" xlink:href="#r0"></use>
+                                <use x="92" y="27" xlink:href="#r0"></use>
+                                <use x="97" y="27" xlink:href="#r0"></use>
+                                <use x="107" y="27" xlink:href="#r0"></use>
+                                <use x="112" y="27" xlink:href="#r0"></use>
+                                <use x="127" y="27" xlink:href="#r0"></use>
+                                <use x="142" y="27" xlink:href="#r0"></use>
+                                <use x="157" y="27" xlink:href="#r0"></use>
+                                <use x="167" y="27" xlink:href="#r0"></use>
+                                <use x="172" y="27" xlink:href="#r0"></use>
+                                <use x="177" y="27" xlink:href="#r0"></use>
+                                <use x="187" y="27" xlink:href="#r0"></use>
+                                <use x="7" y="32" xlink:href="#r0"></use>
+                                <use x="37" y="32" xlink:href="#r0"></use>
+                                <use x="47" y="32" xlink:href="#r0"></use>
+                                <use x="57" y="32" xlink:href="#r0"></use>
+                                <use x="72" y="32" xlink:href="#r0"></use>
+                                <use x="77" y="32" xlink:href="#r0"></use>
+                                <use x="82" y="32" xlink:href="#r0"></use>
+                                <use x="87" y="32" xlink:href="#r0"></use>
+                                <use x="92" y="32" xlink:href="#r0"></use>
+                                <use x="97" y="32" xlink:href="#r0"></use>
+                                <use x="132" y="32" xlink:href="#r0"></use>
+                                <use x="137" y="32" xlink:href="#r0"></use>
+                                <use x="147" y="32" xlink:href="#r0"></use>
+                                <use x="157" y="32" xlink:href="#r0"></use>
+                                <use x="187" y="32" xlink:href="#r0"></use>
+                                <use x="7" y="37" xlink:href="#r0"></use>
+                                <use x="12" y="37" xlink:href="#r0"></use>
+                                <use x="17" y="37" xlink:href="#r0"></use>
+                                <use x="22" y="37" xlink:href="#r0"></use>
+                                <use x="27" y="37" xlink:href="#r0"></use>
+                                <use x="32" y="37" xlink:href="#r0"></use>
+                                <use x="37" y="37" xlink:href="#r0"></use>
+                                <use x="47" y="37" xlink:href="#r0"></use>
+                                <use x="57" y="37" xlink:href="#r0"></use>
+                                <use x="67" y="37" xlink:href="#r0"></use>
+                                <use x="77" y="37" xlink:href="#r0"></use>
+                                <use x="87" y="37" xlink:href="#r0"></use>
+                                <use x="97" y="37" xlink:href="#r0"></use>
+                                <use x="107" y="37" xlink:href="#r0"></use>
+                                <use x="117" y="37" xlink:href="#r0"></use>
+                                <use x="127" y="37" xlink:href="#r0"></use>
+                                <use x="137" y="37" xlink:href="#r0"></use>
+                                <use x="147" y="37" xlink:href="#r0"></use>
+                                <use x="157" y="37" xlink:href="#r0"></use>
+                                <use x="162" y="37" xlink:href="#r0"></use>
+                                <use x="167" y="37" xlink:href="#r0"></use>
+                                <use x="172" y="37" xlink:href="#r0"></use>
+                                <use x="177" y="37" xlink:href="#r0"></use>
+                                <use x="182" y="37" xlink:href="#r0"></use>
+                                <use x="187" y="37" xlink:href="#r0"></use>
+                                <use x="67" y="42" xlink:href="#r0"></use>
+                                <use x="72" y="42" xlink:href="#r0"></use>
+                                <use x="82" y="42" xlink:href="#r0"></use>
+                                <use x="97" y="42" xlink:href="#r0"></use>
+                                <use x="112" y="42" xlink:href="#r0"></use>
+                                <use x="117" y="42" xlink:href="#r0"></use>
+                                <use x="122" y="42" xlink:href="#r0"></use>
+                                <use x="127" y="42" xlink:href="#r0"></use>
+                                <use x="7" y="47" xlink:href="#r0"></use>
+                                <use x="12" y="47" xlink:href="#r0"></use>
+                                <use x="17" y="47" xlink:href="#r0"></use>
+                                <use x="22" y="47" xlink:href="#r0"></use>
+                                <use x="27" y="47" xlink:href="#r0"></use>
+                                <use x="37" y="47" xlink:href="#r0"></use>
+                                <use x="42" y="47" xlink:href="#r0"></use>
+                                <use x="47" y="47" xlink:href="#r0"></use>
+                                <use x="52" y="47" xlink:href="#r0"></use>
+                                <use x="57" y="47" xlink:href="#r0"></use>
+                                <use x="67" y="47" xlink:href="#r0"></use>
+                                <use x="77" y="47" xlink:href="#r0"></use>
+                                <use x="82" y="47" xlink:href="#r0"></use>
+                                <use x="97" y="47" xlink:href="#r0"></use>
+                                <use x="102" y="47" xlink:href="#r0"></use>
+                                <use x="107" y="47" xlink:href="#r0"></use>
+                                <use x="112" y="47" xlink:href="#r0"></use>
+                                <use x="117" y="47" xlink:href="#r0"></use>
+                                <use x="127" y="47" xlink:href="#r0"></use>
+                                <use x="132" y="47" xlink:href="#r0"></use>
+                                <use x="142" y="47" xlink:href="#r0"></use>
+                                <use x="152" y="47" xlink:href="#r0"></use>
+                                <use x="162" y="47" xlink:href="#r0"></use>
+                                <use x="172" y="47" xlink:href="#r0"></use>
+                                <use x="182" y="47" xlink:href="#r0"></use>
+                                <use x="22" y="52" xlink:href="#r0"></use>
+                                <use x="27" y="52" xlink:href="#r0"></use>
+                                <use x="42" y="52" xlink:href="#r0"></use>
+                                <use x="47" y="52" xlink:href="#r0"></use>
+                                <use x="82" y="52" xlink:href="#r0"></use>
+                                <use x="87" y="52" xlink:href="#r0"></use>
+                                <use x="92" y="52" xlink:href="#r0"></use>
+                                <use x="97" y="52" xlink:href="#r0"></use>
+                                <use x="107" y="52" xlink:href="#r0"></use>
+                                <use x="112" y="52" xlink:href="#r0"></use>
+                                <use x="117" y="52" xlink:href="#r0"></use>
+                                <use x="122" y="52" xlink:href="#r0"></use>
+                                <use x="127" y="52" xlink:href="#r0"></use>
+                                <use x="157" y="52" xlink:href="#r0"></use>
+                                <use x="162" y="52" xlink:href="#r0"></use>
+                                <use x="12" y="57" xlink:href="#r0"></use>
+                                <use x="22" y="57" xlink:href="#r0"></use>
+                                <use x="27" y="57" xlink:href="#r0"></use>
+                                <use x="37" y="57" xlink:href="#r0"></use>
+                                <use x="47" y="57" xlink:href="#r0"></use>
+                                <use x="52" y="57" xlink:href="#r0"></use>
+                                <use x="62" y="57" xlink:href="#r0"></use>
+                                <use x="67" y="57" xlink:href="#r0"></use>
+                                <use x="92" y="57" xlink:href="#r0"></use>
+                                <use x="97" y="57" xlink:href="#r0"></use>
+                                <use x="132" y="57" xlink:href="#r0"></use>
+                                <use x="142" y="57" xlink:href="#r0"></use>
+                                <use x="152" y="57" xlink:href="#r0"></use>
+                                <use x="157" y="57" xlink:href="#r0"></use>
+                                <use x="162" y="57" xlink:href="#r0"></use>
+                                <use x="167" y="57" xlink:href="#r0"></use>
+                                <use x="172" y="57" xlink:href="#r0"></use>
+                                <use x="177" y="57" xlink:href="#r0"></use>
+                                <use x="187" y="57" xlink:href="#r0"></use>
+                                <use x="7" y="62" xlink:href="#r0"></use>
+                                <use x="12" y="62" xlink:href="#r0"></use>
+                                <use x="22" y="62" xlink:href="#r0"></use>
+                                <use x="27" y="62" xlink:href="#r0"></use>
+                                <use x="42" y="62" xlink:href="#r0"></use>
+                                <use x="47" y="62" xlink:href="#r0"></use>
+                                <use x="52" y="62" xlink:href="#r0"></use>
+                                <use x="57" y="62" xlink:href="#r0"></use>
+                                <use x="62" y="62" xlink:href="#r0"></use>
+                                <use x="77" y="62" xlink:href="#r0"></use>
+                                <use x="87" y="62" xlink:href="#r0"></use>
+                                <use x="97" y="62" xlink:href="#r0"></use>
+                                <use x="102" y="62" xlink:href="#r0"></use>
+                                <use x="107" y="62" xlink:href="#r0"></use>
+                                <use x="122" y="62" xlink:href="#r0"></use>
+                                <use x="127" y="62" xlink:href="#r0"></use>
+                                <use x="137" y="62" xlink:href="#r0"></use>
+                                <use x="147" y="62" xlink:href="#r0"></use>
+                                <use x="7" y="67" xlink:href="#r0"></use>
+                                <use x="17" y="67" xlink:href="#r0"></use>
+                                <use x="32" y="67" xlink:href="#r0"></use>
+                                <use x="37" y="67" xlink:href="#r0"></use>
+                                <use x="42" y="67" xlink:href="#r0"></use>
+                                <use x="47" y="67" xlink:href="#r0"></use>
+                                <use x="62" y="67" xlink:href="#r0"></use>
+                                <use x="87" y="67" xlink:href="#r0"></use>
+                                <use x="97" y="67" xlink:href="#r0"></use>
+                                <use x="102" y="67" xlink:href="#r0"></use>
+                                <use x="107" y="67" xlink:href="#r0"></use>
+                                <use x="112" y="67" xlink:href="#r0"></use>
+                                <use x="117" y="67" xlink:href="#r0"></use>
+                                <use x="127" y="67" xlink:href="#r0"></use>
+                                <use x="142" y="67" xlink:href="#r0"></use>
+                                <use x="157" y="67" xlink:href="#r0"></use>
+                                <use x="172" y="67" xlink:href="#r0"></use>
+                                <use x="182" y="67" xlink:href="#r0"></use>
+                                <use x="187" y="67" xlink:href="#r0"></use>
+                                <use x="17" y="72" xlink:href="#r0"></use>
+                                <use x="47" y="72" xlink:href="#r0"></use>
+                                <use x="67" y="72" xlink:href="#r0"></use>
+                                <use x="72" y="72" xlink:href="#r0"></use>
+                                <use x="77" y="72" xlink:href="#r0"></use>
+                                <use x="82" y="72" xlink:href="#r0"></use>
+                                <use x="92" y="72" xlink:href="#r0"></use>
+                                <use x="107" y="72" xlink:href="#r0"></use>
+                                <use x="112" y="72" xlink:href="#r0"></use>
+                                <use x="117" y="72" xlink:href="#r0"></use>
+                                <use x="127" y="72" xlink:href="#r0"></use>
+                                <use x="142" y="72" xlink:href="#r0"></use>
+                                <use x="147" y="72" xlink:href="#r0"></use>
+                                <use x="162" y="72" xlink:href="#r0"></use>
+                                <use x="182" y="72" xlink:href="#r0"></use>
+                                <use x="187" y="72" xlink:href="#r0"></use>
+                                <use x="7" y="77" xlink:href="#r0"></use>
+                                <use x="27" y="77" xlink:href="#r0"></use>
+                                <use x="37" y="77" xlink:href="#r0"></use>
+                                <use x="42" y="77" xlink:href="#r0"></use>
+                                <use x="47" y="77" xlink:href="#r0"></use>
+                                <use x="57" y="77" xlink:href="#r0"></use>
+                                <use x="72" y="77" xlink:href="#r0"></use>
+                                <use x="77" y="77" xlink:href="#r0"></use>
+                                <use x="82" y="77" xlink:href="#r0"></use>
+                                <use x="87" y="77" xlink:href="#r0"></use>
+                                <use x="92" y="77" xlink:href="#r0"></use>
+                                <use x="102" y="77" xlink:href="#r0"></use>
+                                <use x="132" y="77" xlink:href="#r0"></use>
+                                <use x="142" y="77" xlink:href="#r0"></use>
+                                <use x="157" y="77" xlink:href="#r0"></use>
+                                <use x="162" y="77" xlink:href="#r0"></use>
+                                <use x="167" y="77" xlink:href="#r0"></use>
+                                <use x="172" y="77" xlink:href="#r0"></use>
+                                <use x="177" y="77" xlink:href="#r0"></use>
+                                <use x="182" y="77" xlink:href="#r0"></use>
+                                <use x="187" y="77" xlink:href="#r0"></use>
+                                <use x="17" y="82" xlink:href="#r0"></use>
+                                <use x="27" y="82" xlink:href="#r0"></use>
+                                <use x="52" y="82" xlink:href="#r0"></use>
+                                <use x="57" y="82" xlink:href="#r0"></use>
+                                <use x="67" y="82" xlink:href="#r0"></use>
+                                <use x="72" y="82" xlink:href="#r0"></use>
+                                <use x="82" y="82" xlink:href="#r0"></use>
+                                <use x="97" y="82" xlink:href="#r0"></use>
+                                <use x="102" y="82" xlink:href="#r0"></use>
+                                <use x="112" y="82" xlink:href="#r0"></use>
+                                <use x="117" y="82" xlink:href="#r0"></use>
+                                <use x="122" y="82" xlink:href="#r0"></use>
+                                <use x="127" y="82" xlink:href="#r0"></use>
+                                <use x="137" y="82" xlink:href="#r0"></use>
+                                <use x="147" y="82" xlink:href="#r0"></use>
+                                <use x="172" y="82" xlink:href="#r0"></use>
+                                <use x="17" y="87" xlink:href="#r0"></use>
+                                <use x="22" y="87" xlink:href="#r0"></use>
+                                <use x="37" y="87" xlink:href="#r0"></use>
+                                <use x="42" y="87" xlink:href="#r0"></use>
+                                <use x="47" y="87" xlink:href="#r0"></use>
+                                <use x="52" y="87" xlink:href="#r0"></use>
+                                <use x="57" y="87" xlink:href="#r0"></use>
+                                <use x="67" y="87" xlink:href="#r0"></use>
+                                <use x="77" y="87" xlink:href="#r0"></use>
+                                <use x="82" y="87" xlink:href="#r0"></use>
+                                <use x="92" y="87" xlink:href="#r0"></use>
+                                <use x="107" y="87" xlink:href="#r0"></use>
+                                <use x="127" y="87" xlink:href="#r0"></use>
+                                <use x="142" y="87" xlink:href="#r0"></use>
+                                <use x="152" y="87" xlink:href="#r0"></use>
+                                <use x="177" y="87" xlink:href="#r0"></use>
+                                <use x="182" y="87" xlink:href="#r0"></use>
+                                <use x="187" y="87" xlink:href="#r0"></use>
+                                <use x="17" y="92" xlink:href="#r0"></use>
+                                <use x="22" y="92" xlink:href="#r0"></use>
+                                <use x="47" y="92" xlink:href="#r0"></use>
+                                <use x="52" y="92" xlink:href="#r0"></use>
+                                <use x="82" y="92" xlink:href="#r0"></use>
+                                <use x="87" y="92" xlink:href="#r0"></use>
+                                <use x="92" y="92" xlink:href="#r0"></use>
+                                <use x="102" y="92" xlink:href="#r0"></use>
+                                <use x="107" y="92" xlink:href="#r0"></use>
+                                <use x="112" y="92" xlink:href="#r0"></use>
+                                <use x="117" y="92" xlink:href="#r0"></use>
+                                <use x="122" y="92" xlink:href="#r0"></use>
+                                <use x="127" y="92" xlink:href="#r0"></use>
+                                <use x="137" y="92" xlink:href="#r0"></use>
+                                <use x="147" y="92" xlink:href="#r0"></use>
+                                <use x="152" y="92" xlink:href="#r0"></use>
+                                <use x="157" y="92" xlink:href="#r0"></use>
+                                <use x="162" y="92" xlink:href="#r0"></use>
+                                <use x="172" y="92" xlink:href="#r0"></use>
+                                <use x="182" y="92" xlink:href="#r0"></use>
+                                <use x="187" y="92" xlink:href="#r0"></use>
+                                <use x="12" y="97" xlink:href="#r0"></use>
+                                <use x="17" y="97" xlink:href="#r0"></use>
+                                <use x="22" y="97" xlink:href="#r0"></use>
+                                <use x="32" y="97" xlink:href="#r0"></use>
+                                <use x="37" y="97" xlink:href="#r0"></use>
+                                <use x="47" y="97" xlink:href="#r0"></use>
+                                <use x="52" y="97" xlink:href="#r0"></use>
+                                <use x="62" y="97" xlink:href="#r0"></use>
+                                <use x="67" y="97" xlink:href="#r0"></use>
+                                <use x="92" y="97" xlink:href="#r0"></use>
+                                <use x="97" y="97" xlink:href="#r0"></use>
+                                <use x="107" y="97" xlink:href="#r0"></use>
+                                <use x="132" y="97" xlink:href="#r0"></use>
+                                <use x="142" y="97" xlink:href="#r0"></use>
+                                <use x="157" y="97" xlink:href="#r0"></use>
+                                <use x="162" y="97" xlink:href="#r0"></use>
+                                <use x="167" y="97" xlink:href="#r0"></use>
+                                <use x="177" y="97" xlink:href="#r0"></use>
+                                <use x="12" y="102" xlink:href="#r0"></use>
+                                <use x="22" y="102" xlink:href="#r0"></use>
+                                <use x="47" y="102" xlink:href="#r0"></use>
+                                <use x="52" y="102" xlink:href="#r0"></use>
+                                <use x="62" y="102" xlink:href="#r0"></use>
+                                <use x="77" y="102" xlink:href="#r0"></use>
+                                <use x="87" y="102" xlink:href="#r0"></use>
+                                <use x="97" y="102" xlink:href="#r0"></use>
+                                <use x="102" y="102" xlink:href="#r0"></use>
+                                <use x="112" y="102" xlink:href="#r0"></use>
+                                <use x="117" y="102" xlink:href="#r0"></use>
+                                <use x="122" y="102" xlink:href="#r0"></use>
+                                <use x="127" y="102" xlink:href="#r0"></use>
+                                <use x="132" y="102" xlink:href="#r0"></use>
+                                <use x="137" y="102" xlink:href="#r0"></use>
+                                <use x="147" y="102" xlink:href="#r0"></use>
+                                <use x="152" y="102" xlink:href="#r0"></use>
+                                <use x="172" y="102" xlink:href="#r0"></use>
+                                <use x="182" y="102" xlink:href="#r0"></use>
+                                <use x="7" y="107" xlink:href="#r0"></use>
+                                <use x="17" y="107" xlink:href="#r0"></use>
+                                <use x="27" y="107" xlink:href="#r0"></use>
+                                <use x="37" y="107" xlink:href="#r0"></use>
+                                <use x="42" y="107" xlink:href="#r0"></use>
+                                <use x="62" y="107" xlink:href="#r0"></use>
+                                <use x="97" y="107" xlink:href="#r0"></use>
+                                <use x="112" y="107" xlink:href="#r0"></use>
+                                <use x="142" y="107" xlink:href="#r0"></use>
+                                <use x="162" y="107" xlink:href="#r0"></use>
+                                <use x="172" y="107" xlink:href="#r0"></use>
+                                <use x="187" y="107" xlink:href="#r0"></use>
+                                <use x="7" y="112" xlink:href="#r0"></use>
+                                <use x="12" y="112" xlink:href="#r0"></use>
+                                <use x="17" y="112" xlink:href="#r0"></use>
+                                <use x="42" y="112" xlink:href="#r0"></use>
+                                <use x="47" y="112" xlink:href="#r0"></use>
+                                <use x="57" y="112" xlink:href="#r0"></use>
+                                <use x="67" y="112" xlink:href="#r0"></use>
+                                <use x="72" y="112" xlink:href="#r0"></use>
+                                <use x="77" y="112" xlink:href="#r0"></use>
+                                <use x="82" y="112" xlink:href="#r0"></use>
+                                <use x="92" y="112" xlink:href="#r0"></use>
+                                <use x="97" y="112" xlink:href="#r0"></use>
+                                <use x="112" y="112" xlink:href="#r0"></use>
+                                <use x="117" y="112" xlink:href="#r0"></use>
+                                <use x="137" y="112" xlink:href="#r0"></use>
+                                <use x="142" y="112" xlink:href="#r0"></use>
+                                <use x="152" y="112" xlink:href="#r0"></use>
+                                <use x="157" y="112" xlink:href="#r0"></use>
+                                <use x="162" y="112" xlink:href="#r0"></use>
+                                <use x="167" y="112" xlink:href="#r0"></use>
+                                <use x="172" y="112" xlink:href="#r0"></use>
+                                <use x="182" y="112" xlink:href="#r0"></use>
+                                <use x="187" y="112" xlink:href="#r0"></use>
+                                <use x="37" y="117" xlink:href="#r0"></use>
+                                <use x="42" y="117" xlink:href="#r0"></use>
+                                <use x="52" y="117" xlink:href="#r0"></use>
+                                <use x="72" y="117" xlink:href="#r0"></use>
+                                <use x="77" y="117" xlink:href="#r0"></use>
+                                <use x="82" y="117" xlink:href="#r0"></use>
+                                <use x="97" y="117" xlink:href="#r0"></use>
+                                <use x="107" y="117" xlink:href="#r0"></use>
+                                <use x="122" y="117" xlink:href="#r0"></use>
+                                <use x="127" y="117" xlink:href="#r0"></use>
+                                <use x="132" y="117" xlink:href="#r0"></use>
+                                <use x="147" y="117" xlink:href="#r0"></use>
+                                <use x="157" y="117" xlink:href="#r0"></use>
+                                <use x="167" y="117" xlink:href="#r0"></use>
+                                <use x="177" y="117" xlink:href="#r0"></use>
+                                <use x="12" y="122" xlink:href="#r0"></use>
+                                <use x="17" y="122" xlink:href="#r0"></use>
+                                <use x="27" y="122" xlink:href="#r0"></use>
+                                <use x="42" y="122" xlink:href="#r0"></use>
+                                <use x="47" y="122" xlink:href="#r0"></use>
+                                <use x="57" y="122" xlink:href="#r0"></use>
+                                <use x="67" y="122" xlink:href="#r0"></use>
+                                <use x="72" y="122" xlink:href="#r0"></use>
+                                <use x="82" y="122" xlink:href="#r0"></use>
+                                <use x="97" y="122" xlink:href="#r0"></use>
+                                <use x="102" y="122" xlink:href="#r0"></use>
+                                <use x="112" y="122" xlink:href="#r0"></use>
+                                <use x="122" y="122" xlink:href="#r0"></use>
+                                <use x="127" y="122" xlink:href="#r0"></use>
+                                <use x="132" y="122" xlink:href="#r0"></use>
+                                <use x="152" y="122" xlink:href="#r0"></use>
+                                <use x="182" y="122" xlink:href="#r0"></use>
+                                <use x="32" y="127" xlink:href="#r0"></use>
+                                <use x="37" y="127" xlink:href="#r0"></use>
+                                <use x="42" y="127" xlink:href="#r0"></use>
+                                <use x="52" y="127" xlink:href="#r0"></use>
+                                <use x="67" y="127" xlink:href="#r0"></use>
+                                <use x="77" y="127" xlink:href="#r0"></use>
+                                <use x="82" y="127" xlink:href="#r0"></use>
+                                <use x="97" y="127" xlink:href="#r0"></use>
+                                <use x="112" y="127" xlink:href="#r0"></use>
+                                <use x="127" y="127" xlink:href="#r0"></use>
+                                <use x="137" y="127" xlink:href="#r0"></use>
+                                <use x="142" y="127" xlink:href="#r0"></use>
+                                <use x="157" y="127" xlink:href="#r0"></use>
+                                <use x="162" y="127" xlink:href="#r0"></use>
+                                <use x="172" y="127" xlink:href="#r0"></use>
+                                <use x="177" y="127" xlink:href="#r0"></use>
+                                <use x="187" y="127" xlink:href="#r0"></use>
+                                <use x="7" y="132" xlink:href="#r0"></use>
+                                <use x="12" y="132" xlink:href="#r0"></use>
+                                <use x="22" y="132" xlink:href="#r0"></use>
+                                <use x="27" y="132" xlink:href="#r0"></use>
+                                <use x="47" y="132" xlink:href="#r0"></use>
+                                <use x="82" y="132" xlink:href="#r0"></use>
+                                <use x="92" y="132" xlink:href="#r0"></use>
+                                <use x="102" y="132" xlink:href="#r0"></use>
+                                <use x="112" y="132" xlink:href="#r0"></use>
+                                <use x="132" y="132" xlink:href="#r0"></use>
+                                <use x="137" y="132" xlink:href="#r0"></use>
+                                <use x="147" y="132" xlink:href="#r0"></use>
+                                <use x="152" y="132" xlink:href="#r0"></use>
+                                <use x="157" y="132" xlink:href="#r0"></use>
+                                <use x="162" y="132" xlink:href="#r0"></use>
+                                <use x="172" y="132" xlink:href="#r0"></use>
+                                <use x="182" y="132" xlink:href="#r0"></use>
+                                <use x="7" y="137" xlink:href="#r0"></use>
+                                <use x="17" y="137" xlink:href="#r0"></use>
+                                <use x="22" y="137" xlink:href="#r0"></use>
+                                <use x="37" y="137" xlink:href="#r0"></use>
+                                <use x="42" y="137" xlink:href="#r0"></use>
+                                <use x="47" y="137" xlink:href="#r0"></use>
+                                <use x="62" y="137" xlink:href="#r0"></use>
+                                <use x="67" y="137" xlink:href="#r0"></use>
+                                <use x="92" y="137" xlink:href="#r0"></use>
+                                <use x="102" y="137" xlink:href="#r0"></use>
+                                <use x="107" y="137" xlink:href="#r0"></use>
+                                <use x="122" y="137" xlink:href="#r0"></use>
+                                <use x="132" y="137" xlink:href="#r0"></use>
+                                <use x="137" y="137" xlink:href="#r0"></use>
+                                <use x="142" y="137" xlink:href="#r0"></use>
+                                <use x="157" y="137" xlink:href="#r0"></use>
+                                <use x="162" y="137" xlink:href="#r0"></use>
+                                <use x="167" y="137" xlink:href="#r0"></use>
+                                <use x="172" y="137" xlink:href="#r0"></use>
+                                <use x="177" y="137" xlink:href="#r0"></use>
+                                <use x="182" y="137" xlink:href="#r0"></use>
+                                <use x="7" y="142" xlink:href="#r0"></use>
+                                <use x="32" y="142" xlink:href="#r0"></use>
+                                <use x="42" y="142" xlink:href="#r0"></use>
+                                <use x="47" y="142" xlink:href="#r0"></use>
+                                <use x="52" y="142" xlink:href="#r0"></use>
+                                <use x="62" y="142" xlink:href="#r0"></use>
+                                <use x="77" y="142" xlink:href="#r0"></use>
+                                <use x="82" y="142" xlink:href="#r0"></use>
+                                <use x="97" y="142" xlink:href="#r0"></use>
+                                <use x="102" y="142" xlink:href="#r0"></use>
+                                <use x="112" y="142" xlink:href="#r0"></use>
+                                <use x="117" y="142" xlink:href="#r0"></use>
+                                <use x="127" y="142" xlink:href="#r0"></use>
+                                <use x="132" y="142" xlink:href="#r0"></use>
+                                <use x="147" y="142" xlink:href="#r0"></use>
+                                <use x="152" y="142" xlink:href="#r0"></use>
+                                <use x="177" y="142" xlink:href="#r0"></use>
+                                <use x="187" y="142" xlink:href="#r0"></use>
+                                <use x="7" y="147" xlink:href="#r0"></use>
+                                <use x="17" y="147" xlink:href="#r0"></use>
+                                <use x="37" y="147" xlink:href="#r0"></use>
+                                <use x="52" y="147" xlink:href="#r0"></use>
+                                <use x="62" y="147" xlink:href="#r0"></use>
+                                <use x="87" y="147" xlink:href="#r0"></use>
+                                <use x="92" y="147" xlink:href="#r0"></use>
+                                <use x="107" y="147" xlink:href="#r0"></use>
+                                <use x="112" y="147" xlink:href="#r0"></use>
+                                <use x="122" y="147" xlink:href="#r0"></use>
+                                <use x="142" y="147" xlink:href="#r0"></use>
+                                <use x="147" y="147" xlink:href="#r0"></use>
+                                <use x="152" y="147" xlink:href="#r0"></use>
+                                <use x="157" y="147" xlink:href="#r0"></use>
+                                <use x="162" y="147" xlink:href="#r0"></use>
+                                <use x="167" y="147" xlink:href="#r0"></use>
+                                <use x="182" y="147" xlink:href="#r0"></use>
+                                <use x="187" y="147" xlink:href="#r0"></use>
+                                <use x="47" y="152" xlink:href="#r0"></use>
+                                <use x="52" y="152" xlink:href="#r0"></use>
+                                <use x="57" y="152" xlink:href="#r0"></use>
+                                <use x="67" y="152" xlink:href="#r0"></use>
+                                <use x="72" y="152" xlink:href="#r0"></use>
+                                <use x="77" y="152" xlink:href="#r0"></use>
+                                <use x="82" y="152" xlink:href="#r0"></use>
+                                <use x="87" y="152" xlink:href="#r0"></use>
+                                <use x="92" y="152" xlink:href="#r0"></use>
+                                <use x="97" y="152" xlink:href="#r0"></use>
+                                <use x="102" y="152" xlink:href="#r0"></use>
+                                <use x="107" y="152" xlink:href="#r0"></use>
+                                <use x="112" y="152" xlink:href="#r0"></use>
+                                <use x="117" y="152" xlink:href="#r0"></use>
+                                <use x="132" y="152" xlink:href="#r0"></use>
+                                <use x="147" y="152" xlink:href="#r0"></use>
+                                <use x="167" y="152" xlink:href="#r0"></use>
+                                <use x="172" y="152" xlink:href="#r0"></use>
+                                <use x="187" y="152" xlink:href="#r0"></use>
+                                <use x="7" y="157" xlink:href="#r0"></use>
+                                <use x="12" y="157" xlink:href="#r0"></use>
+                                <use x="17" y="157" xlink:href="#r0"></use>
+                                <use x="22" y="157" xlink:href="#r0"></use>
+                                <use x="27" y="157" xlink:href="#r0"></use>
+                                <use x="32" y="157" xlink:href="#r0"></use>
+                                <use x="37" y="157" xlink:href="#r0"></use>
+                                <use x="47" y="157" xlink:href="#r0"></use>
+                                <use x="57" y="157" xlink:href="#r0"></use>
+                                <use x="72" y="157" xlink:href="#r0"></use>
+                                <use x="77" y="157" xlink:href="#r0"></use>
+                                <use x="82" y="157" xlink:href="#r0"></use>
+                                <use x="87" y="157" xlink:href="#r0"></use>
+                                <use x="97" y="157" xlink:href="#r0"></use>
+                                <use x="107" y="157" xlink:href="#r0"></use>
+                                <use x="127" y="157" xlink:href="#r0"></use>
+                                <use x="142" y="157" xlink:href="#r0"></use>
+                                <use x="147" y="157" xlink:href="#r0"></use>
+                                <use x="157" y="157" xlink:href="#r0"></use>
+                                <use x="167" y="157" xlink:href="#r0"></use>
+                                <use x="177" y="157" xlink:href="#r0"></use>
+                                <use x="182" y="157" xlink:href="#r0"></use>
+                                <use x="187" y="157" xlink:href="#r0"></use>
+                                <use x="7" y="162" xlink:href="#r0"></use>
+                                <use x="37" y="162" xlink:href="#r0"></use>
+                                <use x="67" y="162" xlink:href="#r0"></use>
+                                <use x="72" y="162" xlink:href="#r0"></use>
+                                <use x="82" y="162" xlink:href="#r0"></use>
+                                <use x="92" y="162" xlink:href="#r0"></use>
+                                <use x="102" y="162" xlink:href="#r0"></use>
+                                <use x="112" y="162" xlink:href="#r0"></use>
+                                <use x="117" y="162" xlink:href="#r0"></use>
+                                <use x="127" y="162" xlink:href="#r0"></use>
+                                <use x="132" y="162" xlink:href="#r0"></use>
+                                <use x="147" y="162" xlink:href="#r0"></use>
+                                <use x="167" y="162" xlink:href="#r0"></use>
+                                <use x="7" y="167" xlink:href="#r0"></use>
+                                <use x="17" y="167" xlink:href="#r0"></use>
+                                <use x="22" y="167" xlink:href="#r0"></use>
+                                <use x="27" y="167" xlink:href="#r0"></use>
+                                <use x="37" y="167" xlink:href="#r0"></use>
+                                <use x="47" y="167" xlink:href="#r0"></use>
+                                <use x="52" y="167" xlink:href="#r0"></use>
+                                <use x="67" y="167" xlink:href="#r0"></use>
+                                <use x="77" y="167" xlink:href="#r0"></use>
+                                <use x="122" y="167" xlink:href="#r0"></use>
+                                <use x="137" y="167" xlink:href="#r0"></use>
+                                <use x="147" y="167" xlink:href="#r0"></use>
+                                <use x="152" y="167" xlink:href="#r0"></use>
+                                <use x="157" y="167" xlink:href="#r0"></use>
+                                <use x="162" y="167" xlink:href="#r0"></use>
+                                <use x="167" y="167" xlink:href="#r0"></use>
+                                <use x="177" y="167" xlink:href="#r0"></use>
+                                <use x="7" y="172" xlink:href="#r0"></use>
+                                <use x="17" y="172" xlink:href="#r0"></use>
+                                <use x="22" y="172" xlink:href="#r0"></use>
+                                <use x="27" y="172" xlink:href="#r0"></use>
+                                <use x="37" y="172" xlink:href="#r0"></use>
+                                <use x="47" y="172" xlink:href="#r0"></use>
+                                <use x="52" y="172" xlink:href="#r0"></use>
+                                <use x="87" y="172" xlink:href="#r0"></use>
+                                <use x="92" y="172" xlink:href="#r0"></use>
+                                <use x="97" y="172" xlink:href="#r0"></use>
+                                <use x="107" y="172" xlink:href="#r0"></use>
+                                <use x="112" y="172" xlink:href="#r0"></use>
+                                <use x="122" y="172" xlink:href="#r0"></use>
+                                <use x="132" y="172" xlink:href="#r0"></use>
+                                <use x="142" y="172" xlink:href="#r0"></use>
+                                <use x="147" y="172" xlink:href="#r0"></use>
+                                <use x="152" y="172" xlink:href="#r0"></use>
+                                <use x="157" y="172" xlink:href="#r0"></use>
+                                <use x="167" y="172" xlink:href="#r0"></use>
+                                <use x="172" y="172" xlink:href="#r0"></use>
+                                <use x="182" y="172" xlink:href="#r0"></use>
+                                <use x="187" y="172" xlink:href="#r0"></use>
+                                <use x="7" y="177" xlink:href="#r0"></use>
+                                <use x="17" y="177" xlink:href="#r0"></use>
+                                <use x="22" y="177" xlink:href="#r0"></use>
+                                <use x="27" y="177" xlink:href="#r0"></use>
+                                <use x="37" y="177" xlink:href="#r0"></use>
+                                <use x="47" y="177" xlink:href="#r0"></use>
+                                <use x="62" y="177" xlink:href="#r0"></use>
+                                <use x="67" y="177" xlink:href="#r0"></use>
+                                <use x="82" y="177" xlink:href="#r0"></use>
+                                <use x="97" y="177" xlink:href="#r0"></use>
+                                <use x="107" y="177" xlink:href="#r0"></use>
+                                <use x="127" y="177" xlink:href="#r0"></use>
+                                <use x="142" y="177" xlink:href="#r0"></use>
+                                <use x="157" y="177" xlink:href="#r0"></use>
+                                <use x="162" y="177" xlink:href="#r0"></use>
+                                <use x="177" y="177" xlink:href="#r0"></use>
+                                <use x="187" y="177" xlink:href="#r0"></use>
+                                <use x="7" y="182" xlink:href="#r0"></use>
+                                <use x="37" y="182" xlink:href="#r0"></use>
+                                <use x="47" y="182" xlink:href="#r0"></use>
+                                <use x="52" y="182" xlink:href="#r0"></use>
+                                <use x="57" y="182" xlink:href="#r0"></use>
+                                <use x="62" y="182" xlink:href="#r0"></use>
+                                <use x="77" y="182" xlink:href="#r0"></use>
+                                <use x="87" y="182" xlink:href="#r0"></use>
+                                <use x="92" y="182" xlink:href="#r0"></use>
+                                <use x="97" y="182" xlink:href="#r0"></use>
+                                <use x="102" y="182" xlink:href="#r0"></use>
+                                <use x="117" y="182" xlink:href="#r0"></use>
+                                <use x="122" y="182" xlink:href="#r0"></use>
+                                <use x="142" y="182" xlink:href="#r0"></use>
+                                <use x="147" y="182" xlink:href="#r0"></use>
+                                <use x="157" y="182" xlink:href="#r0"></use>
+                                <use x="167" y="182" xlink:href="#r0"></use>
+                                <use x="172" y="182" xlink:href="#r0"></use>
+                                <use x="182" y="182" xlink:href="#r0"></use>
+                                <use x="7" y="187" xlink:href="#r0"></use>
+                                <use x="12" y="187" xlink:href="#r0"></use>
+                                <use x="17" y="187" xlink:href="#r0"></use>
+                                <use x="22" y="187" xlink:href="#r0"></use>
+                                <use x="27" y="187" xlink:href="#r0"></use>
+                                <use x="32" y="187" xlink:href="#r0"></use>
+                                <use x="37" y="187" xlink:href="#r0"></use>
+                                <use x="47" y="187" xlink:href="#r0"></use>
+                                <use x="62" y="187" xlink:href="#r0"></use>
+                                <use x="87" y="187" xlink:href="#r0"></use>
+                                <use x="97" y="187" xlink:href="#r0"></use>
+                                <use x="122" y="187" xlink:href="#r0"></use>
+                                <use x="132" y="187" xlink:href="#r0"></use>
+                                <use x="152" y="187" xlink:href="#r0"></use>
+                                <use x="162" y="187" xlink:href="#r0"></use>
+                                <use x="172" y="187" xlink:href="#r0"></use>
+                                <use x="182" y="187" xlink:href="#r0"></use>
+                                <use x="187" y="187" xlink:href="#r0"></use>
+                            </svg>
+                        </div>
+                        <h4 style="color: yellowgreen;font-size: 18px" id="time">凭证启用时间2020-8-7 11:33:10</h4>
+                        <p class="countdown-2">允许返校</p>
+                        <div style="margin-top: 10px">
+                            <h6 style="color: deeppink;">返回学校请及时确认回校，确认后凭证将永久失效。</h6>
+                            <h6 style="color: deeppink;padding-top: 10px;padding-bottom: 10px;text-align: center">
+                                确认前请开启您的定位设备权限</h6>
+                            <a href="javascript:;" onclick="sureback(&#39;99ebdc06-70f5-444b-9146-f8fdb8b4b019&#39;)" class="weui-btn bg-blue">确认已返回学校</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function sureback(id) {
+            $.cookie('_session', 'vjunro6pDAjAqpaM9kuCy2BC4j02imixS5GK15kY');
+            $.cookie('XSRF', 'eyJpdiI6InhuV0hcL01XVGNKVXZYR3JYQ3BkMzhnPT0iLCJ2YWx1ZSI6IkxORG5iVmkzYUtHVkU5YWw3Mlc5UFlZTzhZMmEzK0VMaFpXSElQSFBUb1VjVVNoVmNZMEk0eVlNV3dzdEg1NUMiLCJtYWMiOiI1OTU1Mjc5YzFkMjZlNzE5ZTkzYzA3NmYyMDI5MzFiYWEyZmQzMmVjN2FlZDg1ODgyNmI0MzZhOTYwODdmMDBlIn0%3D');
+            $.confirm("确认返校后，进校码将完全失效。", "确认已返回学校？", function () {
+                //发送进校申请
+                $.alert('操作成功', function () {
+                    window.location.href = 'https://students.demoo.com.cn/wap/plug/slak'
+                });
+
+
+                // $.post('/wap/plug/slak/sureback/' + id, {
+                //     _token: 'i66D5Q8WXlL4ngeGyK5OU8d6F66JKDYukaJ72yGC',
+                //     _method: 'PUT'
+                // }, function (res) {
+                //     if (res.code == 1) {
+                //         $.alert(res.msg, function () {
+                //             window.location.href = "/wap/plug/slak";
+                //         })
+                //     } else {
+                //         $.alert(res.msg)
+                //     }
+                // })
+            }, function () {
+                //取消操作
+                $('.weui_dialog').remove();
+                $('.weui_mask').remove();
+            });
+        }
+    </script>
+
+</div>
+
+
+
+</body></html>
