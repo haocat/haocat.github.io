@@ -22,7 +22,7 @@ export const zhNavbar = navbar([
       {
         text: "安全芯片",
         icon: "edit",
-        prefix: "banana/",
+        prefix: "security/",
         children: [
           {
             text: "介绍",
