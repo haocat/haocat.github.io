@@ -72,7 +72,7 @@
 
     <!-- 👇 点击下拉箭头 展开/收起 计算过程 -->
     <div class="flex items-center gap-2 cursor-pointer text-purple-600 font-bold text-lg" onclick="toggleCalcProcess()">
-        <span>📝 补偿计算全过程展开点这里-></span>
+        <span>📝 展开补偿计算全过程请点这里----></span>
         <span id="processArrow">▶</span>
     </div>
 
@@ -331,7 +331,7 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
 提前腾空奖 = 建筑面积${buildArea}㎡×90元/㎡ = ${advEmptyComp}元<br>
 100%签约腾空奖 = 固定10000元 = ${allComp}元<br>
 凑间占地面积费用 = -(${mergeArea}㎡×${mergePrice}元/㎡) = ${mergeComp}元（需缴纳，为负数）<br><br>
-六、各项补偿费用合计（协议中其他补偿）= 搬迁费+安置费+损失+奖励+凑间费 = ${total10}元<br><br>
+六、各项补偿费用合计（协议中其他补偿）= 宅基地搬迁费${moveLandTotal}元 + 房票搬迁费${moveTicketTotal}元 + 宅基地安置费${tempLandTotal}元 + 房票安置费${tempTicketTotal}元 + 停产停业损失${stopComp}元 + 房屋签约奖${signComp}元 + 提前签约奖${advSignComp}元 + 房屋评估奖${evalComp}元 + 按时腾空奖${emptyComp}元 + 提前腾空奖${advEmptyComp}元 + 100%签约腾空奖${allComp}元 + 凑间费${mergeComp}元 = ${total10}元<br><br>
 七、重置与装修补偿分摊计算<br>
 宅基地部分重置与装修额补偿 = 宅基地比例${(landRatio*100).toFixed(2)}% × 总重置装修补偿${resetComp}元 = ${landReset.toFixed(2)}元<br>
 房票部分重置装修补偿 = 房票比例${(ticketRatio*100).toFixed(2)}% × 总重置装修补偿${resetComp}元 = ${ticketReset.toFixed(2)}元<br><br>
