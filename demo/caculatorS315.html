@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>收补偿自动计算工具（协议直填版）</title>
+    <title>征收补偿计算工具（参照征收补偿协议）</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-4 max-w-6xl mx-auto">
-<h1 class="text-2xl font-bold text-center text-blue-700 mb-4">征收补偿自动计算工具（协议直填版）</h1>
+<h1 class="text-2xl font-bold text-center text-blue-700 mb-4">征收补偿计算工具（仅供参考,请参照征收协议）</h1>
 
 <!-- 输入区 -->
 <div class="bg-white p-5 rounded-lg shadow mb-5 grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -37,10 +37,15 @@
             <div><label>凑间单价（元/㎡）</label><input id="mergePrice" type="number" class="w-full p-2 border rounded" placeholder="无填0"></div>
         </div>
 
-        <!-- 停产停业开关 -->
+        <!-- 停产停业开关 + 年份输入框 -->
         <div class="p-2 border rounded bg-gray-50 mb-2">
-            <input type="checkbox" id="hasBusiness" class="w-4 h-4">
+            <input type="checkbox" id="hasBusiness" onchange="toggleBusinessYear()" class="w-4 h-4">
             <label class="text-red-600">已提供经营证明→计算停产停业损失</label>
+        </div>
+        <!-- 停产停业年份输入框：默认隐藏 -->
+        <div id="businessYearBox" style="display: none;" class="mb-2">
+            <label>停产停业年份（不足1年按1年算，最多10年）</label>
+            <input id="businessYear" type="number" min="1" max="10" step="1" class="w-full p-2 border rounded" placeholder="请输入年份">
         </div>
 
         <!-- 已删除：展示计算全过程勾选框 -->
@@ -67,7 +72,7 @@
 
     <!-- 👇 点击下拉箭头 展开/收起 计算过程 -->
     <div class="flex items-center gap-2 cursor-pointer text-purple-600 font-bold text-lg" onclick="toggleCalcProcess()">
-        <span>📝 补偿计算全过程</span>
+        <span>📝 补偿计算全过程展开点这里-></span>
         <span id="processArrow">▶</span>
     </div>
 
@@ -98,7 +103,7 @@
             </div>
             <div>
                 <div class="font-semibold">3 停产停业损失补偿费</div>
-                <div class="pl-6">建筑面积=<span id="stopBuild"></span>㎡，计量=1年，单价=6元/㎡·年，小计=<span id="stopComp" class="text-red-600">0</span>元</div>
+                <div class="pl-6">建筑面积=<span id="stopBuild"></span>㎡，计量=<span id="stopYearShow">0</span>年，单价=6元/㎡·年，小计=<span id="stopComp" class="text-red-600">0</span>元</div>
             </div>
             <div>
                 <div class="font-semibold">4 房屋签约奖</div>
@@ -186,6 +191,18 @@ function toggleMergeBox() {
     }
 }
 
+// 切换停产停业年份输入框显示/隐藏
+function toggleBusinessYear() {
+    const box = document.getElementById('businessYearBox');
+    const isCheck = document.getElementById('hasBusiness').checked;
+    if(isCheck){
+        box.style.display = 'block';
+    }else{
+        box.style.display = 'none';
+        document.getElementById('businessYear').value = '';
+    }
+}
+
 // 👇 点击箭头：展开/收起 计算过程
 function toggleCalcProcess() {
     const processBox = document.getElementById('calcProcess');
@@ -206,6 +223,7 @@ function resetAll() {
     document.getElementById('isMerge').checked = false;
     document.getElementById('hasBusiness').checked = false;
     document.getElementById('mergeBox').style.display = 'none';
+    document.getElementById('businessYearBox').style.display = 'none';
     
     // 收起计算过程
     document.getElementById('calcProcess').style.display = 'none';
@@ -234,6 +252,19 @@ function calculate() {
     const mergePrice = +document.getElementById('mergePrice').value||0;
     const hasBusiness = document.getElementById('hasBusiness').checked;
 
+    // 停产停业年份（0年则不计费；>0才按规则计算）
+    let businessYear = +document.getElementById('businessYear').value || 0;
+
+    if (businessYear <= 0) {
+    // 填 0 或负数 → 不计算停产停业损失
+        businessYear = 0;
+    } else {
+    // 大于0：不足1年按1年，最多10年
+    businessYear = Math.ceil(businessYear);
+    businessYear = businessYear < 1 ? 1 : businessYear;
+    businessYear = businessYear > 10 ? 10 : businessYear;
+    }
+
     // 固定参数
     const YARD_PRICE=600,MOVE_PRICE=10,MOVE_MIN=1000,TEMP_PRICE=10,TEMP_MIN=800,STOP_PRICE=6;
     const SIGN_PRICE=1500,ADV_SIGN=120,EVAL=4000,EMPTY=10,ADV_EMPTY=90,ALL=10000,TICKET_RATE=1.25;
@@ -258,8 +289,8 @@ function calculate() {
     const tempLandTotal = landArea > 0 ? Math.max(landBuild * TEMP_PRICE, TEMP_MIN) * 12 : 0;
     const tempTicketTotal = ticketArea > 0 ? Math.max(ticketBuild * TEMP_PRICE, TEMP_MIN) * 6 : 0;
 
-    // 停产停业
-    const stopComp = hasBusiness ? (buildArea * STOP_PRICE) : 0;
+    // 停产停业（新逻辑：年份限制 + 每年6元/㎡）
+    const stopComp = hasBusiness ? (buildArea * STOP_PRICE * businessYear) : 0;
 
     // 各项奖励（全明细）
     const signComp = legalArea * SIGN_PRICE;
@@ -291,7 +322,7 @@ function calculate() {
 宅基地安置费 = ${landBuild.toFixed(2)}㎡×10元/㎡·月×12个月（每月不足800元按800元）= ${tempLandTotal}元<br>
 房票安置费 = ${ticketBuild.toFixed(2)}㎡×10元/㎡·月×6个月（每月不足800元按800元）= ${tempTicketTotal}元<br><br>
 四、停产停业损失计算<br>
-${hasBusiness?'停产停业损失 = 建筑面积'+buildArea+'㎡×6元/㎡·年 = '+stopComp+'元':'未提供经营证明，停产停业损失不计费'}<br><br>
+${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×${businessYear}年 = ${stopComp}元（不足1年按1年算，最多10年）`:'未提供经营证明，停产停业损失不计费'}<br><br>
 五、各项奖励费用计算<br>
 房屋签约奖 = 合法占地面积${legalArea}㎡×1500元/㎡ = ${signComp}元<br>
 提前签约奖 = 建筑面积${buildArea}㎡×120元/㎡ = ${advSignComp}元<br>
@@ -334,6 +365,7 @@ ${hasBusiness?'停产停业损失 = 建筑面积'+buildArea+'㎡×6元/㎡·年 
     document.getElementById('tempTicketTotal').textContent = tempTicketTotal.toLocaleString();
 
     document.getElementById('stopBuild').textContent = buildArea;
+    document.getElementById('stopYearShow').textContent = hasBusiness ? businessYear : 0; // 展示年份
     document.getElementById('stopComp').textContent = stopComp.toLocaleString();
     document.getElementById('signArea').textContent = legalArea;
     document.getElementById('signComp').textContent = signComp.toLocaleString();
