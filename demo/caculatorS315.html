@@ -23,7 +23,7 @@
         <h2 class="text-lg font-semibold mb-3 border-b pb-2">二、安置方式</h2>
         <div class="mb-2"><label>宅基地安置面积（㎡）</label><input id="landArea" type="number" class="w-full p-2 border rounded"></div>
         <div class="mb-2"><label>房票安置面积（㎡）</label><input id="ticketArea" type="number" class="w-full p-2 border rounded"></div>
-        <div class="mb-2"><label>宅基地补偿价（元/㎡）</label><input id="landPrice" type="number" class="w-full p-2 border rounded"></div>
+        <div class="mb-2"><label>宅基地补偿价（元/㎡）</label><input id="landPrice" type="number" value="14400"class="w-full p-2 border rounded"></div>
 
         <!-- 凑间占地多排开关 -->
         <div class="mb-2 p-2 border rounded bg-gray-50">
@@ -217,25 +217,41 @@ function toggleCalcProcess() {
     }
 }
 
-// 重置所有数据
+// 重置所有数据（已修复：保留展开文字和箭头）
 function resetAll() {
+    // 清空数字输入框
     document.querySelectorAll('input[type="number"]').forEach(item => item.value = '');
+    // 取消勾选框
     document.getElementById('isMerge').checked = false;
     document.getElementById('hasBusiness').checked = false;
+    // 隐藏额外输入框
     document.getElementById('mergeBox').style.display = 'none';
     document.getElementById('businessYearBox').style.display = 'none';
     
     // 收起计算过程
     document.getElementById('calcProcess').style.display = 'none';
     document.getElementById('processArrow').textContent = '▶';
-    
-    document.querySelectorAll('span').forEach(item => {
-        if(item.id.includes('Ratio')) item.textContent = '0%';
-        else if(item.id.includes('Upper')) item.textContent = '零元整';
-        else if(item.id.includes('BuildShow')) item.textContent = '0';
-        else item.textContent = item.classList.contains('text-red-600') ? '0' : '';
-    });
     document.getElementById('processText').innerHTML = '';
+
+    // 🔥 精准重置结果数值，不清空页面文字（修复核心）
+    const resultSpans = [
+        'landRatio','ticketRatio','landBuildShow','ticketBuildShow',
+        'resResetComp','resAppendComp','yardAreaShow','resYardComp','otherCompTotal',
+        'moveLandBuild','moveLandTotal','moveTicketBuild','moveTicketTotal',
+        'tempLandBuild','tempLandTotal','tempTicketBuild','tempTicketTotal',
+        'stopBuild','stopYearShow','stopComp','signArea','signComp',
+        'advSignBuild','advSignComp','evalComp','emptyBuild','emptyComp',
+        'advEmptyBuild','advEmptyComp','allComp','mergeAreaShow','mergePriceShow','mergeComp',
+        'total10','moneyTotal','moneyUpper','tPrice','tArea','tReset','ticketValue'
+    ];
+    resultSpans.forEach(id => {
+        const el = document.getElementById(id);
+        if(!el) return;
+        if(id.includes('Ratio')) el.textContent = '0%';
+        else if(id.includes('Upper')) el.textContent = '零元整';
+        else if(id === 'processArrow') el.textContent = '▶';
+        else el.textContent = (el.classList.contains('text-red-600') || id.includes('BuildShow')) ? '0' : '';
+    });
 }
 
 function calculate() {
