@@ -197,13 +197,28 @@
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 dark:text-white p-4 max-w-6xl mx-auto transition-colors duration-300">
-<div class="flex justify-between items-center mb-3">
-    <h1 class="text-xl md:text-2xl font-bold text-center text-blue-700 dark:text-indigo-400">项目征收补偿计算工具</h1>
-    <button id="themeToggle" class="w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow flex items-center justify-center text-yellow-500 dark:text-blue-300">
-        🌞
-    </button>
+<!-- <div class="flex justify-between items-center mb-3">
+    <h1 class="text-xl md:text-2xl font-bold text-center text-blue-700 dark:text-indigo-400">S315项目征收补偿计算工具（官方协议版）</h1>
+    <div class="flex gap-4">
+        <button id="themeToggle" class="w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow flex items-center justify-center text-yellow-500 dark:text-blue-300">
+            🌞
+        </button>
+        <button id="toggleRecordBtn" class="w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700 shadow flex items-center justify-center text-white">
+            📋
+        </button>
+    </div>
+</div> -->
+<div class="flex justify-between items-center mb-3"></div>
+    <h1 class="text-xl md:text-2xl font-bold text-center text-blue-700 dark:text-indigo-400">项目征收补偿计算工具(excel导入导出)</h1>
+    <div class="flex gap-4">
+        <button id="themeToggle" class="w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow flex items-center justify-center text-yellow-500 dark:text-blue-300">
+            🌞
+        </button>
+        <button id="toggleRecordBtn" class="w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700 shadow flex items-center justify-center text-white">
+            📋
+        </button>
+    </div>
 </div>
-
 <div class="text-center mb-4 space-x-3 btn-group">
     <button onclick="calculate()" class="bg-blue-600 hover:bg-blue-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white px-4 py-2 rounded text-lg transition-colors">一键计算</button>
     <button onclick="addCurrentRecord()" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded text-lg transition-colors">添加到导出列表</button>
@@ -223,7 +238,7 @@
     <div class="float-header" id="floatHeader">
         <span>已添加的导出列表</span>
         <div class="flex gap-2">
-            <span class="float-toggle" id="floatToggle">−</span>
+            <!-- <span class="float-toggle" id="floatToggle">−</span> -->
             <span class="float-close" onclick="hideFloatWindow()">×</span>
         </div>
     </div>
@@ -409,6 +424,8 @@ themeToggle.addEventListener('click', () => {
     localStorage.setItem('darkMode', isDark);
     themeToggle.innerHTML = isDark ? '🌙' : '🌞';
 });
+// 👇 新增：绑定右下角按钮点击事件
+document.getElementById('toggleRecordBtn').addEventListener('click', toggleFloatWindow);
 
 let isDragging = false;
 let dragStartX, dragStartY, windowStartX, windowStartY;
@@ -603,18 +620,22 @@ function clearAllRecords() {
     updateRecordFloatList();
     alert('已清空所有记录！');
 }
-
+function toggleFloatWindow() {
+    const floatWindow = document.getElementById('recordFloatWindow');
+    floatWindow.style.display = floatWindow.style.display === 'none' ? 'block' : 'none';
+}
 function hideFloatWindow() {
+    // document.getElementById('recordFloatWindow').style.display = 'none';
+    // const showBtn = document.createElement('button');
+    // showBtn.id = 'showFloatBtn';
+    // showBtn.className = 'fixed bottom-10 right-10 bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg';
+    // showBtn.innerHTML = '📋';
+    // showBtn.onclick = function() {
+    //     document.getElementById('recordFloatWindow').style.display = 'block';
+    //     document.body.removeChild(showBtn);
+    // };
+    // document.body.appendChild(showBtn);
     document.getElementById('recordFloatWindow').style.display = 'none';
-    const showBtn = document.createElement('button');
-    showBtn.id = 'showFloatBtn';
-    showBtn.className = 'fixed bottom-10 right-10 bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg';
-    showBtn.innerHTML = '📋';
-    showBtn.onclick = function() {
-        document.getElementById('recordFloatWindow').style.display = 'block';
-        document.body.removeChild(showBtn);
-    };
-    document.body.appendChild(showBtn);
 }
 
 function digitToUpper(n) {
@@ -1091,6 +1112,8 @@ window.onload = function() {
     loadRecords();
     const floatWindow = document.getElementById('recordFloatWindow');
     floatWindow.style.position = 'fixed';
+    // 👇 新增：默认隐藏浮窗（核心代码）
+    floatWindow.style.display = 'none';
 };
 </script>
 </body>
