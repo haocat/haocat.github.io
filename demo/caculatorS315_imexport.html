@@ -829,7 +829,8 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
 凑间占地面积费用 = -(${mergeArea}㎡×${mergePrice}元/㎡) = ${mergeComp.toFixed(2)}元（需缴纳，为负数）<br><br>
 
 六、各项补偿费用合计<br>
-1-10项原始合计（保留两位小数）= ${total10.toFixed(2)}元<br>
+各项补偿费用合计（协议中其他补偿）= 宅基地搬迁费${moveLandTotal}元 + 房票搬迁费${moveTicketTotal}元 + 宅基地安置费${tempLandTotal}元 + 房票安置费${tempTicketTotal}元 + 停产停业损失${stopComp}元 + 房屋签约奖${signComp}元 + 提前签约奖${advSignComp}元 + 房屋评估奖${evalComp}元 + 按时腾空奖${emptyComp}元 + 提前腾空奖${advEmptyComp}元 + 100%签约腾空奖${allComp}元 + 凑间费${mergeComp}元 = ${total10}元<br><br>
+
 👉 其他补偿（四舍五入精确到元）= ${otherCompTotal}元<br><br>
 
 七、重置与装修补偿分摊计算<br>
