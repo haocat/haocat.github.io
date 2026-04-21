@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>征收补偿计算工具（红线内）</title>
+    <title>征收补偿计算工具(单条导入+多条导出)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -209,7 +209,7 @@
     </div>
 </div> -->
 <div class="flex justify-between items-center mb-3"></div>
-    <h1 class="text-xl md:text-2xl font-bold text-center text-blue-700 dark:text-indigo-400">项目征收补偿计算工具(excel导入导出)</h1>
+    <h1 class="text-xl md:text-2xl font-bold text-center text-blue-700 dark:text-indigo-400">项目征收补偿计算工具(单条导入+多条导出)</h1>
     <div class="flex gap-4">
         <button id="themeToggle" class="w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow flex items-center justify-center text-yellow-500 dark:text-blue-300">
             🌞
@@ -901,18 +901,18 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
 因S315三门至龙游公路东阳怀鲁至周官段改建工程项目建设需要，根据《东阳市交通项目征收集体土地上房屋补偿安置方案》规定，现甲、乙双方在平等、自愿、协商一致的基础上，就乙方所有的房屋征收补偿安置达成协议如下：
 
 ## 一、基本情况
-乙方位于东阳市江北街道**${houseAddress || '/'}**房屋共1处，合法占地面积**${formatZero(legalArea, 0)}**㎡，建筑面积**${formatZero(buildArea, 0)}**㎡，庭院面积**${formatZero(yardArea, 0)}**㎡，具体如下：
+乙方位于东阳市江北街道**${houseAddress || '/'}**房屋共1处，合法占地面积**${formatZero(legalArea, 2)}**㎡，建筑面积**${formatZero(buildArea, 2)}**㎡，庭院面积**${formatZero(yardArea, 2)}**㎡，具体如下：
 
 |序号|房屋所有权号|土地证号|不动产证号|合法占地面积|建筑面积|
 |---|---|---|---|---|---|
-|1|<br/>|<br/>|<br/>|**${formatZero(legalArea, 0)}㎡**|**${formatZero(buildArea, 0)}㎡**|
+|1|<br/>|<br/>|<br/>|**${formatZero(legalArea, 2)}㎡**|**${formatZero(buildArea, 2)}㎡**|
 |2|<br/>|<br/>|<br/>|<br/>|<br/>|
 |3|<br/>|<br/>|<br/>|<br/>|<br/>|
 
 ## 二、安置方式
-经自然资源和规划部门认定，乙方在签订本协议时可享有的总可安置占地面积为**${formatZero(totalSetArea, 0)}**㎡。选择的安置方式为：
-1．乙方选择宅基地安置**${formatZero(landArea, 0)}**㎡。
-2．乙方选择房票安置**${formatZero(ticketArea, 0)}**㎡。
+经自然资源和规划部门认定，乙方在签订本协议时可享有的总可安置占地面积为**${formatZero(totalSetArea, 2)}**㎡。选择的安置方式为：
+1．乙方选择宅基地安置**${formatZero(landArea, 2)}**㎡。
+2．乙方选择房票安置**${formatZero(ticketArea, 2)}**㎡。
 
 ## 三、房屋征收补偿与安置补偿
 1.房屋重置价值补偿和室内装饰装修补偿共**${formatZero(resetComp)}**元。乙方同意由甲方统一委托的东阳市精诚房地产评估有限公司进行评估，以2024年5月23日为评估时点。（以评估报告为准）
