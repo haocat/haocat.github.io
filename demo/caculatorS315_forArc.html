@@ -278,9 +278,15 @@
             <input type="checkbox" id="hasBusiness" onchange="toggleBusinessYear()" class="w-4 h-4">
             <label class="text-red-600 dark:text-red-400">已提供经营证明→计算停产停业损失</label>
         </div>
-        <div id="businessYearBox" style="display: none;" class="mb-2">
-            <label>停产停业年份（不足1年按1年算，最多10年）</label>
-            <input id="businessYear" type="number" min="1" max="10" step="1" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600" placeholder="请输入年份">
+        <div id="businessYearBox" style="display: none;" class="space-y-2 mb-2">
+            <div>
+                <label>经营场所面积（㎡）</label>
+                <input id="businessArea" type="number" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600" placeholder="用于经营的建筑面积">
+            </div>
+            <div>
+                <label>停产停业年份（不足1年按1年算，最多10年）</label>
+                <input id="businessYear" type="number" min="1" max="10" step="1" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600" placeholder="请输入年份">
+            </div>
         </div>
     </div>
 </div>
@@ -327,7 +333,7 @@
             </div>
             <div>
                 <div class="font-semibold">3 停产停业损失补偿费</div>
-                <div class="pl-5 md:pl-6">建筑面积=<span id="stopBuild"></span>㎡，计量=<span id="stopYearShow">0</span>年，单价=6元/㎡·年，小计=<span id="stopComp" class="text-red-600 dark:text-red-400">0</span>元</div>
+                <div class="pl-5 md:pl-6">经营面积=<span id="stopBuild"></span>㎡，计量=<span id="stopYearShow">0</span>年，单价=6元/㎡·年，小计=<span id="stopComp" class="text-red-600 dark:text-red-400">0</span>元</div>
             </div>
             <div>
                 <div class="font-semibold">4 房屋签约奖</div>
@@ -526,6 +532,7 @@
             mergeArea: document.getElementById('mergeArea').value || 0,
             mergePrice: document.getElementById('mergePrice').value || 0,
             hasBusiness: document.getElementById('hasBusiness').checked ? '是' : '否',
+            businessArea: document.getElementById('businessArea').value || 0,     // 新增经营面积
             businessYear: document.getElementById('businessYear').value || 0,
             landRatioVal: document.getElementById('landRatio').textContent.replace('%',''),
             ticketRatioVal: document.getElementById('ticketRatio').textContent.replace('%',''),
@@ -565,7 +572,7 @@
         const summaryHeader = [
             '编号','被征收人','身份证号码','联系电话','房屋坐落','合法占地面积','建筑面积','庭院面积','房屋重置+装修补偿','房屋附属物补偿',
             '总可安置面积','宅基地安置面积','房票安置面积','宅基地补偿价','是否凑间占地多排','凑间占地面积m2',
-            '凑间单价元/m2','是否已提供经营证明','停产停业年份','宅基地安置比例','房票安置比例',
+            '凑间单价元/m2','是否已提供经营证明','经营场所面积','停产停业年份','宅基地安置比例','房票安置比例',
             '货币补偿总额','货币补偿大写','房票价值','合法庭院补偿600元/m2','其他补偿（各项费用合计）',
             '1、住宅搬迁补偿费-宅基地安置','1、住宅搬迁补偿费-房票安置',
             '2、住宅临时安置-宅基地安置','2、住宅临时安置-房票安置',
@@ -578,7 +585,7 @@
             summaryData.push([
                 item.userCode, item.ownerName, item.idCard, item.phone, item.houseAddress, item.legalArea, item.buildArea, item.yardArea, item.resetComp, item.appendComp,
                 item.totalSetArea, item.landArea, item.ticketArea, item.landPrice, item.isMerge, item.mergeArea,
-                item.mergePrice, item.hasBusiness, item.businessYear, item.landRatioVal, item.ticketRatioVal,
+                item.mergePrice, item.hasBusiness, item.businessArea || 0, item.businessYear, item.landRatioVal, item.ticketRatioVal,
                 item.moneyTotal, item.moneyUpper, item.ticketValue, item.yardComp, item.otherCompTotal,
                 item.moveLandTotal, item.moveTicketTotal,
                 item.tempLandTotal, item.tempTicketTotal,
@@ -603,7 +610,7 @@
             detailData.push(['','','房票安置', item.ticketBuildShow,'1次','征收房屋建筑面积10元/平方米.次，不足1000元的按1000元计发', item.moveTicketTotal]);
             detailData.push(['2','住宅临时安置费','宅基地安置', item.landBuildShow,'自征收之月起至宅基地安置之月后12个月止（先行支付12个月）','征收房屋建筑面积10元/平方米.月标准计发，不足800元/月的按800元/月计发', item.tempLandTotal]);
             detailData.push(['','','房票安置', item.ticketBuildShow,'6个月','征收房屋建筑面积10元/平方米.月标准计发，不足800元/月的按800元/月计发', item.tempTicketTotal]);
-            detailData.push(['3','停产停业损失补偿费','停产停业损失补偿费', item.buildArea,'不足一年按一年计算，最多不超过 10年','每年每平方米6元', item.stopComp]);
+            detailData.push(['3','停产停业损失补偿费','停产停业损失补偿费', item.businessArea || 0,'不足一年按一年计算，最多不超过 10年','每年每平方米6元', item.stopComp]);
             detailData.push(['4','房屋签约奖','房屋签约奖','被征收房屋合法建筑占地面积（㎡）：'+item.legalArea,'被征收房屋合法建筑占地面积（㎡）：'+item.legalArea,'1500元/平方米', item.signComp]);
             detailData.push(['5','提前签约奖','提前签约奖', item.buildArea,'1次','最多不超过征收房屋建筑面积 120元/平方米', item.advSignComp]);
             detailData.push(['6','房屋评估奖（户）','房屋评估奖（户）','','1户','4000元', item.evalComp]);
@@ -668,10 +675,16 @@
         document.getElementById('isMerge').checked ? box.style.display = 'block' : (box.style.display = 'none', document.getElementById('mergeArea').value = '', document.getElementById('mergePrice').value = '14400');
     }
 
-    // 切换经营证明输入框显隐
+    // 切换经营证明输入框显隐（现在显示两个输入框）
     function toggleBusinessYear() {
         const box = document.getElementById('businessYearBox');
-        document.getElementById('hasBusiness').checked ? box.style.display = 'block' : (box.style.display = 'none', document.getElementById('businessYear').value = '');
+        if (document.getElementById('hasBusiness').checked) {
+            box.style.display = 'block';
+        } else {
+            box.style.display = 'none';
+            document.getElementById('businessArea').value = '';
+            document.getElementById('businessYear').value = '';
+        }
     }
 
     // 切换计算过程显示/隐藏
@@ -753,6 +766,8 @@
         const hasBusiness = document.getElementById('hasBusiness').checked;
         const isMerge = document.getElementById('isMerge').checked;
 
+        // 读取经营面积
+        const businessArea = +document.getElementById('businessArea').value || 0;
         let businessYear = +document.getElementById('businessYear').value || 0;
         if (businessYear <= 0) { businessYear = 0; } else {
             businessYear = Math.ceil(businessYear);
@@ -763,12 +778,11 @@
         const YARD_PRICE=600,MOVE_PRICE=10,MOVE_MIN=1000,TEMP_PRICE=10,TEMP_MIN=800,STOP_PRICE=6;
         const SIGN_PRICE=1500,ADV_SIGN=120,EVAL=4000,EMPTY=10,ADV_EMPTY=90,ALL=10000,TICKET_RATE=1.25;
 
-        // ===================== 新增：总可安置占地面积强制校验 =====================
         const totalSet = Number((landArea + ticketArea).toFixed(2));
         const checkTotalSet = Number(totalSetArea.toFixed(2));
         if (totalSet !== checkTotalSet) {
             alert(`❌ 数据错误！\n总可安置占地面积：${checkTotalSet} ㎡\n宅基地+房票安置面积：${totalSet} ㎡\n两者必须相等！`);
-            return; // 终止计算
+            return;
         }
 
         let landRatio = totalSet>0 ? landArea/totalSet : 0;
@@ -785,7 +799,8 @@
         const moveTicketTotal = ticketArea > 0 ? Number((Math.max(ticketBuild * MOVE_PRICE, MOVE_MIN) * 1).toFixed(2)) : 0;
         const tempLandTotal = landArea > 0 ? Number((Math.max(landBuild * TEMP_PRICE, TEMP_MIN) * 12).toFixed(2)) : 0;
         const tempTicketTotal = ticketArea > 0 ? Number((Math.max(ticketBuild * TEMP_PRICE, TEMP_MIN) * 6).toFixed(2)) : 0;
-        const stopComp = hasBusiness ? Number((buildArea * STOP_PRICE * businessYear).toFixed(2)) : 0;
+        // 使用经营面积计算停产停业损失
+        const stopComp = hasBusiness ? Number((businessArea * STOP_PRICE * businessYear).toFixed(2)) : 0;
 
         const signComp = Number((legalArea * SIGN_PRICE).toFixed(2));
         const advSignComp = Number((buildArea * ADV_SIGN).toFixed(2));
@@ -802,14 +817,11 @@
         const moneyUpper = digitToUpper(moneyTotal);
         const ticketValue = Math.round((landPrice * ticketArea + ticketReset) * TICKET_RATE);
 
-        // 核心格式化函数：0值/空值返回/
         const formatZero = (val, fixed = 2) => {
             const num = Number(val);
             return isNaN(num) || num === 0 ? '/' : num.toFixed(fixed);
         };
-        // 停产停业专用：未勾选直接返回/
         const formatBusiness = (val) => hasBusiness ? formatZero(val) : '/';
-        // 凑间占地专用：未勾选直接返回/
         const formatMerge = (val) => isMerge ? formatZero(val) : '/';
 
         const processText = document.getElementById('processText');
@@ -828,7 +840,7 @@
 房票安置费 = ${ticketBuild.toFixed(2)}㎡×10元/㎡·月×6个月（每月不足800元按800元）= ${tempTicketTotal.toFixed(2)}元<br><br>
 
 四、停产停业损失计算<br>
-${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×${businessYear}年 = ${stopComp.toFixed(2)}元（不足1年按1年算，最多10年）`:'未提供经营证明，停产停业损失不计费'}<br><br>
+${hasBusiness?`停产停业损失 = 经营面积${businessArea}㎡×6元/㎡·年×${businessYear}年 = ${stopComp.toFixed(2)}元（不足1年按1年算，最多10年）`:'未提供经营证明，停产停业损失不计费'}<br><br>
 
 五、各项奖励费用计算<br>
 房屋签约奖 = 合法占地面积${legalArea}㎡×1500元/㎡ = ${signComp.toFixed(2)}元<br>
@@ -873,7 +885,8 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
         document.getElementById('tempLandTotal').textContent = tempLandTotal.toFixed(2);
         document.getElementById('tempTicketBuild').textContent = ticketBuild.toFixed(2);
         document.getElementById('tempTicketTotal').textContent = tempTicketTotal.toFixed(2);
-        document.getElementById('stopBuild').textContent = buildArea.toFixed(2);
+        // 显示经营面积
+        document.getElementById('stopBuild').textContent = businessArea.toFixed(2);
         document.getElementById('stopYearShow').textContent = businessYear;
         document.getElementById('stopComp').textContent = stopComp.toFixed(2);
         document.getElementById('signArea').textContent = legalArea.toFixed(2);
@@ -897,7 +910,7 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
         document.getElementById('tReset').textContent = ticketReset.toFixed(2);
         document.getElementById('ticketValue').textContent = ticketValue.toFixed(2);
 
-        // 修改后的Markdown协议：0值/未勾选 自动填充/
+        // 协议填充
         const mdAgreement = `
 # 房屋征收补偿安置协议
 
@@ -940,7 +953,7 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
 |||房票安置|**${formatZero(ticketBuild)}**|1次|征收房屋建筑面积10元/平方米.次，不足1000元的按1000元计发|**${formatZero(moveTicketTotal)}**|
 |2|住宅临时安置费|宅基地安置|**${formatZero(landBuild)}**|自征收之月起至宅基地安置之月后12个月止（先行支付12个月）|征收房屋建筑面积10元/平方米.月标准计发，不足800元/月的按800元/月计发|**${formatZero(tempLandTotal)}**|
 |||房票安置|**${formatZero(ticketBuild)}**|6个月|征收房屋建筑面积10元/平方米.月标准计发，不足800元/月的按800元/月计发|**${formatZero(tempTicketTotal)}**|
-|3|停产停业损失补偿费|停产停业损失补偿费|**${formatBusiness(buildArea)}**|不足一年按一年计算，最多不超过 10年|每年每平方米6元|**${formatBusiness(stopComp)}**|
+|3|停产停业损失补偿费|停产停业损失补偿费|**${formatBusiness(businessArea)}**|不足一年按一年计算，最多不超过 10年|每年每平方米6元|**${formatBusiness(stopComp)}**|
 |4|房屋签约奖|房屋签约奖|被征收房屋合法建筑占地面积（㎡）：**${formatZero(legalArea)}**|被征收房屋合法建筑占地面积（㎡）：**${formatZero(legalArea)}**|1500元/平方米|**${formatZero(signComp)}**|
 |5|提前签约奖|提前签约奖|**${formatZero(buildArea)}**|1次|最多不超过征收房屋建筑面积 120元/平方米|**${formatZero(advSignComp)}**|
 |6|房屋评估奖（户）|房屋评估奖（户）||1户|4000元|**${formatZero(evalComp)}**|
@@ -1008,17 +1021,14 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
         container.innerHTML = '';
         recordList.forEach((item, index) => {
             const recordItem = document.createElement('div');
-            recordItem.className = 'record-item cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700'; // 添加 cursor-pointer 和 hover 效果
-            // 修改这里：点击整个 div 触发 viewRecord(index)
+            recordItem.className = 'record-item cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700';
             recordItem.innerHTML = ` 
                 <div class="flex-1">
                     <span>${index+1}. ${item.ownerName}（${item.userCode}）</span>
                     <span class="text-sm text-gray-500 dark:text-gray-400 ml-2">货币总额: ${item.moneyTotal}</span>
                 </div>
-                <!-- 如果需要保留删除按钮，请把下面这行取消注释 -->
                 <span class="record-remove" onclick="removeRecord(${index}); event.stopPropagation();">删除</span>
             `;
-            // 绑定点击事件查看记录
             recordItem.onclick = function() {
                 viewRecord(index);
             };
@@ -1035,12 +1045,11 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
         updateRecordFloatList();
     }
 
-    // 查看记录
+    // 查看记录（已适配经营面积字段）
     function viewRecord(index) {
         const item = recordList[index];
         if (!item) return;
 
-        // 1. 填充表单数据
         document.getElementById('userCode').value = item.userCode || '';
         document.getElementById('ownerName').value = item.ownerName || '';
         document.getElementById('idCard').value = item.idCard || '';
@@ -1056,37 +1065,25 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
         document.getElementById('ticketArea').value = item.ticketArea || 0;
         document.getElementById('landPrice').value = item.landPrice || 14400;
         
-        // 处理复选框状态 (凑间)
         const isMergeChecked = item.isMerge === '是';
         document.getElementById('isMerge').checked = isMergeChecked;
-        toggleMergeBox(); // 根据状态显示/隐藏输入框
+        toggleMergeBox();
         if (isMergeChecked) {
             document.getElementById('mergeArea').value = item.mergeArea || 0;
             document.getElementById('mergePrice').value = item.mergePrice || 14400;
         }
         
-        // 处理复选框状态 (经营)
         const hasBusinessChecked = item.hasBusiness === '是';
         document.getElementById('hasBusiness').checked = hasBusinessChecked;
-        toggleBusinessYear(); // 根据状态显示/隐藏输入框
+        toggleBusinessYear();
         if (hasBusinessChecked) {
+            document.getElementById('businessArea').value = item.businessArea || 0;
             document.getElementById('businessYear').value = item.businessYear || 0;
         }
 
-        // 2. 执行计算 (这会自动更新所有显示的数值)
         calculate();
-
-        // 3. 自动展开 "计算过程" 面板
-        const processBox = document.getElementById('calcProcess');
-        const arrow = document.getElementById('processArrow');
-        // 强制展开（不管之前是什么状态）
-        processBox.style.display = 'block';
-        arrow.textContent = '▼';
-
-        // 4. (可选) 平滑滚动到计算过程区域，方便用户直接看到
-        // document.getElementById('calcProcess').scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        // 提示：不需要手动修改下方的显示文本，因为 calculate() 函数已经更新了所有 span 的 innerText
+        document.getElementById('calcProcess').style.display = 'block';
+        document.getElementById('processArrow').textContent = '▼';
         alert(`已加载记录：${item.ownerName}\n计算过程已自动展开。`);
     }
 
@@ -1100,12 +1097,11 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
         document.getElementById('excelSingleFileInput').click();
     }
 
-    // 单条导入Excel数据
+    // 单条导入Excel数据（已适配经营面积字段）
     function handleSingleExcelFile(e) {
         const file = e.target.files[0];
         if (!file) return;
         
-        // 支持 .xlsx 和 .xls
         if (!file.name.endsWith('.xlsx') && !file.name.endsWith('.xls')) {
             alert('请上传工具导出的 .xlsx 或 .xls 格式Excel文件！');
             return;
@@ -1116,55 +1112,35 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
             try {
                 const data = new Uint8Array(e.target.result);
                 const workbook = XLSX.read(data, { type: 'array' });
-                
-                // 优先尝试读取【汇总表】，如果不存在则读取第一个表
                 let worksheet = workbook.Sheets['汇总表'];
                 if (!worksheet) {
-                    // 如果没有汇总表，取第一个工作表
-                    const sheetName = workbook.SheetNames[0];
-                    worksheet = workbook.Sheets[sheetName];
-                    console.warn(`未找到"汇总表"，正在读取第一个工作表: ${sheetName}`);
+                    worksheet = workbook.Sheets[workbook.SheetNames[0]];
                 }
-                
                 if (!worksheet) {
                     alert('无法读取Excel中的数据表！');
                     return;
                 }
-                
-                // 将工作表转换为JSON数组
                 const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-                
                 if (jsonData.length <= 1) {
                     alert('Excel中无有效数据！');
                     return;
                 }
-                
-                // 提取表头和数据行
-                // 假设第一行是表头，数据从第二行开始
                 const headers = jsonData[0];
                 const dataRows = jsonData.slice(1).filter(row => row.length > 0 && row[0] !== undefined && row[0] !== '');
-                
                 if (dataRows.length === 0) {
                     alert('未找到有效住户数据！');
                     return;
                 }
-                
-                // 显示选择界面，让用户选择要导入的单条记录
                 let selectText = '请选择要导入的住户：\n';
                 dataRows.forEach((row, idx) => {
                     selectText += `${idx + 1}. 编号：${row[0]}｜姓名：${row[1]}\n`;
                 });
-                
                 const selectIndex = prompt(selectText, '1');
                 if (!selectIndex || isNaN(selectIndex) || selectIndex < 1 || selectIndex > dataRows.length) {
                     alert('输入无效，导入取消！');
                     return;
                 }
-                
-                // 获取用户选择的单条数据
                 const selectedRow = dataRows[selectIndex - 1];
-                
-                // 创建数据对象（与批量导入中的结构一致）
                 const item = {
                     userCode: selectedRow[0] || '',
                     ownerName: selectedRow[1] || '',
@@ -1184,122 +1160,82 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
                     mergeArea: selectedRow[15] || 0,
                     mergePrice: selectedRow[16] || 14400,
                     hasBusiness: selectedRow[17] === '是' || selectedRow[17] === true ? '是' : '否',
-                    businessYear: selectedRow[18] || 0,
-                    landRatioVal: selectedRow[19] || '0%',
-                    ticketRatioVal: selectedRow[20] || '0%',
-                    moneyTotal: selectedRow[21] || 0,
-                    moneyUpper: selectedRow[22] || '零元整',
-                    ticketValue: selectedRow[23] || 0,
-                    yardComp: selectedRow[24] || 0,
-                    otherCompTotal: selectedRow[25] || 0,
-                    moveLandTotal: selectedRow[26] || 0,
-                    moveTicketTotal: selectedRow[27] || 0,
-                    tempLandTotal: selectedRow[28] || 0,
-                    tempTicketTotal: selectedRow[29] || 0,
-                    stopComp: selectedRow[30] || 0,
-                    signComp: selectedRow[31] || 0,
-                    advSignComp: selectedRow[32] || 0,
-                    evalComp: selectedRow[33] || 0,
-                    emptyComp: selectedRow[34] || 0,
-                    advEmptyComp: selectedRow[35] || 0,
-                    allComp: selectedRow[36] || 0,
-                    mergeComp: selectedRow[37] || 0
+                    businessArea: selectedRow[18] || 0,
+                    businessYear: selectedRow[19] || 0,
+                    landRatioVal: selectedRow[20] || '0%',
+                    ticketRatioVal: selectedRow[21] || '0%',
+                    moneyTotal: selectedRow[22] || 0,
+                    moneyUpper: selectedRow[23] || '零元整',
+                    ticketValue: selectedRow[24] || 0,
+                    yardComp: selectedRow[25] || 0,
+                    otherCompTotal: selectedRow[26] || 0,
+                    moveLandTotal: selectedRow[27] || 0,
+                    moveTicketTotal: selectedRow[28] || 0,
+                    tempLandTotal: selectedRow[29] || 0,
+                    tempTicketTotal: selectedRow[30] || 0,
+                    stopComp: selectedRow[31] || 0,
+                    signComp: selectedRow[32] || 0,
+                    advSignComp: selectedRow[33] || 0,
+                    evalComp: selectedRow[34] || 0,
+                    emptyComp: selectedRow[35] || 0,
+                    advEmptyComp: selectedRow[36] || 0,
+                    allComp: selectedRow[37] || 0,
+                    mergeComp: selectedRow[38] || 0
                 };
-                
-                // 数据清洗：确保数值类型
                 const numericFields = ['legalArea', 'buildArea', 'yardArea', 'resetComp', 'appendComp', 
                                      'totalSetArea', 'landArea', 'ticketArea', 'landPrice', 'mergeArea', 
-                                     'mergePrice', 'businessYear', 'moneyTotal', 'ticketValue', 'yardComp',
+                                     'mergePrice', 'businessArea', 'businessYear', 'moneyTotal', 'ticketValue', 'yardComp',
                                      'otherCompTotal', 'moveLandTotal', 'moveTicketTotal', 'tempLandTotal',
                                      'tempTicketTotal', 'stopComp', 'signComp', 'advSignComp', 'evalComp',
                                      'emptyComp', 'advEmptyComp', 'allComp', 'mergeComp'];
-                numericFields.forEach(field => {
-                    if (item[field] !== undefined) {
-                        item[field] = Number(item[field]) || 0;
-                    }
-                });
-                
-                // 1. 将解析出的单条数据直接添加到 recordList
+                numericFields.forEach(field => { item[field] = Number(item[field]) || 0; });
                 recordList.push(item);
-                
-                // 2. 持久化存储
                 localStorage.setItem('s315_records', JSON.stringify(recordList));
-                
-                // 3. 更新界面
                 updateRecordCount();
                 updateRecordFloatList();
-                
-                // 4. 给用户反馈
                 alert(`✅ 单条导入成功！\n已导入：${item.userCode} - ${item.ownerName}\n当前总记录数：${recordList.length} 条`);
-
             } catch (err) {
                 alert('Excel解析失败：' + err.message);
                 console.error(err);
             } finally {
-                // 清空文件输入，以便下次可以重新选择同一个文件
                 document.getElementById('excelSingleFileInput').value = '';
             }
         };
         reader.readAsArrayBuffer(file);
     }
 
-    // 批量导入Excel数据
+    // 批量导入Excel数据（已适配经营面积字段）
     function handleBatchExcelFile(e) {
         const file = e.target.files[0];
         if (!file) return;
-        
-        // 支持 .xlsx 和 .xls
         if (!file.name.endsWith('.xlsx') && !file.name.endsWith('.xls')) {
             alert('请上传工具导出的 .xlsx 或 .xls 格式Excel文件！');
             return;
         }
-        
         const reader = new FileReader();
         reader.onload = function(e) {
             try {
                 const data = new Uint8Array(e.target.result);
                 const workbook = XLSX.read(data, { type: 'array' });
-                
-                // 优先尝试读取【汇总表】，如果不存在则读取第一个表
                 let worksheet = workbook.Sheets['汇总表'];
-                if (!worksheet) {
-                    // 如果没有汇总表，取第一个工作表
-                    const sheetName = workbook.SheetNames[0];
-                    worksheet = workbook.Sheets[sheetName];
-                    console.warn(`未找到“汇总表”，正在读取第一个工作表: ${sheetName}`);
-                }
-                
+                if (!worksheet) worksheet = workbook.Sheets[workbook.SheetNames[0]];
                 if (!worksheet) {
                     alert('无法读取Excel中的数据表！');
                     return;
                 }
-                
-                // 将工作表转换为JSON数组
                 const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-                
                 if (jsonData.length <= 1) {
                     alert('Excel中无有效数据！');
                     return;
                 }
-                
-                // 提取表头和数据行
-                // 假设第一行是表头，数据从第二行开始
-                const headers = jsonData[0];
                 const dataRows = jsonData.slice(1).filter(row => row.length > 0 && row[0] !== undefined && row[0] !== '');
-                
                 if (dataRows.length === 0) {
                     alert('未找到有效住户数据！');
                     return;
                 }
-                
-                let successCount = 0;
-                let failCount = 0;
-                
-                // 遍历每一行数据
+                let successCount = 0, failCount = 0;
                 dataRows.forEach(row => {
                     try {
-                        // 这里的索引对应 exportAllToExcel 函数中 summaryHeader 的顺序
-                        // 由于Excel读取是按列顺序的，必须严格对应导出时的列数
                         const item = {
                             userCode: row[0] || '',
                             ownerName: row[1] || '',
@@ -1319,111 +1255,51 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
                             mergeArea: row[15] || 0,
                             mergePrice: row[16] || 14400,
                             hasBusiness: row[17] === '是' || row[17] === true ? '是' : '否',
-                            businessYear: row[18] || 0,
-                            // 注意：以下字段在导出时是计算结果，导入时如果为空也不影响重新计算
-                            landRatioVal: row[19] || '0%',
-                            ticketRatioVal: row[20] || '0%',
-                            moneyTotal: row[21] || 0,
-                            moneyUpper: row[22] || '零元整',
-                            ticketValue: row[23] || 0,
-                            yardComp: row[24] || 0,
-                            otherCompTotal: row[25] || 0,
-                            moveLandTotal: row[26] || 0,
-                            moveTicketTotal: row[27] || 0,
-                            tempLandTotal: row[28] || 0,
-                            tempTicketTotal: row[29] || 0,
-                            stopComp: row[30] || 0,
-                            signComp: row[31] || 0,
-                            advSignComp: row[32] || 0,
-                            evalComp: row[33] || 0,
-                            emptyComp: row[34] || 0,
-                            advEmptyComp: row[35] || 0,
-                            allComp: row[36] || 0,
-                            mergeComp: row[37] || 0
+                            businessArea: row[18] || 0,
+                            businessYear: row[19] || 0,
+                            landRatioVal: row[20] || '0%',
+                            ticketRatioVal: row[21] || '0%',
+                            moneyTotal: row[22] || 0,
+                            moneyUpper: row[23] || '零元整',
+                            ticketValue: row[24] || 0,
+                            yardComp: row[25] || 0,
+                            otherCompTotal: row[26] || 0,
+                            moveLandTotal: row[27] || 0,
+                            moveTicketTotal: row[28] || 0,
+                            tempLandTotal: row[29] || 0,
+                            tempTicketTotal: row[30] || 0,
+                            stopComp: row[31] || 0,
+                            signComp: row[32] || 0,
+                            advSignComp: row[33] || 0,
+                            evalComp: row[34] || 0,
+                            emptyComp: row[35] || 0,
+                            advEmptyComp: row[36] || 0,
+                            allComp: row[37] || 0,
+                            mergeComp: row[38] || 0
                         };
-                        
-                        // 数据清洗：确保数值类型
                         const numericFields = ['legalArea', 'buildArea', 'yardArea', 'resetComp', 'appendComp', 
                                              'totalSetArea', 'landArea', 'ticketArea', 'landPrice', 'mergeArea', 
-                                             'mergePrice', 'businessYear', 'moneyTotal', 'ticketValue', 'yardComp',
+                                             'mergePrice', 'businessArea', 'businessYear', 'moneyTotal', 'ticketValue', 'yardComp',
                                              'otherCompTotal', 'moveLandTotal', 'moveTicketTotal', 'tempLandTotal',
                                              'tempTicketTotal', 'stopComp', 'signComp', 'advSignComp', 'evalComp',
                                              'emptyComp', 'advEmptyComp', 'allComp', 'mergeComp'];
-                        numericFields.forEach(field => {
-                            if (item[field] !== undefined) {
-                                item[field] = Number(item[field]) || 0;
-                            }
-                        });
-
-                        // 添加到列表（这里直接推入，不进行重复检查）
+                        numericFields.forEach(field => { item[field] = Number(item[field]) || 0; });
                         recordList.push(item);
                         successCount++;
-                    } catch (rowError) {
-                        console.error('单条数据导入失败:', rowError, '数据行:', row);
-                        failCount++;
-                    }
+                    } catch (rowError) { failCount++; }
                 });
-
-                // 去重逻辑（可选）：根据 userCode 或 ownerName 去重
-                // 如果需要去重，取消下面这行的注释
-                // recordList = Array.from(new Map(recordList.map(item => [item.userCode || item.ownerName, item])).values());
-
-                // 保存到本地存储
                 localStorage.setItem('s315_records', JSON.stringify(recordList));
-                
-                // 更新界面
                 updateRecordCount();
                 updateRecordFloatList();
-                
-                // 给用户反馈
                 alert(`✅ 批量导入完成！\n成功导入：${successCount} 条\n跳过/失败：${failCount} 条\n当前总记录数：${recordList.length} 条`);
-
             } catch (err) {
                 alert('Excel解析失败：' + err.message);
                 console.error(err);
             } finally {
-                // 清空文件输入，以便下次可以重新选择同一个文件
-                document.getElementById('excelFileInput').value = '';
+                document.getElementById('excelBatchFileInput').value = '';
             }
         };
         reader.readAsArrayBuffer(file);
-    }
-
-    // 根据Excel数据填充表单（用于查看记录）
-    function fillFormByExcelData(data) {
-        resetAll();
-        
-        document.getElementById('userCode').value = data[0] || '';
-        document.getElementById('ownerName').value = data[1] || '';
-        document.getElementById('idCard').value = data[2] || '';
-        document.getElementById('phone').value = data[3] || '';
-        document.getElementById('houseAddress').value = data[4] || '';
-        document.getElementById('legalArea').value = data[5] || 0;
-        document.getElementById('buildArea').value = data[6] || 0;
-        document.getElementById('yardArea').value = data[7] || 0;
-        document.getElementById('resetComp').value = data[8] || 0;
-        document.getElementById('appendComp').value = data[9] || 0;
-        document.getElementById('totalSetArea').value = data[10] || 0;
-        document.getElementById('landArea').value = data[11] || 0;
-        document.getElementById('ticketArea').value = data[12] || 0;
-        document.getElementById('landPrice').value = data[13] || 14400;
-        
-        const isMerge = data[14] === '是';
-        document.getElementById('isMerge').checked = isMerge;
-        toggleMergeBox();
-        if (isMerge) {
-            document.getElementById('mergeArea').value = data[15] || 0;
-            document.getElementById('mergePrice').value = data[16] || 14400;
-        }
-
-        const hasBusiness = data[17] === '是';
-        document.getElementById('hasBusiness').checked = hasBusiness;
-        toggleBusinessYear();
-        if (hasBusiness) {
-            document.getElementById('businessYear').value = data[18] || 0;
-        }
-
-        calculate();
     }
 
     // 页面加载完成后初始化
@@ -1432,7 +1308,6 @@ ${hasBusiness?`停产停业损失 = 建筑面积${buildArea}㎡×6元/㎡·年×
         loadRecords();
         const floatWindow = document.getElementById('recordFloatWindow');
         floatWindow.style.position = 'fixed';
-        // 默认隐藏浮窗（核心代码）
         floatWindow.style.display = 'none';
     };
 </script>
